@@ -1,5 +1,3 @@
-// add class SocialAPI here? 
-
 export default class SocialAPI {
 
     constructor(apiBase) {
