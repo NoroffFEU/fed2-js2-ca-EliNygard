@@ -1,3 +1,3 @@
-import { authGuard } from "../../utilities/authGuard.js";
+import { authGuard } from "../../utilities/authGuard";
 
 authGuard();
