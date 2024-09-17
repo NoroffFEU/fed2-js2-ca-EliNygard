@@ -14,7 +14,9 @@ const user = {
     password: "fake1234"
 }
 
-
 await api.auth.register(user)
 
-// await api.auth.login({ email: user.email, password: user.password })
+// test log in
+
+// after creating social/post in class - test create, update, read, delete 
+
