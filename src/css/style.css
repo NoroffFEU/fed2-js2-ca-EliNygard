@@ -1,1 +1,6 @@
 @import url(_reset.css);
+
+body {
+    background-color: lightblue;
+  }
+  
