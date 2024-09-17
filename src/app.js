@@ -9,14 +9,15 @@ const api = new SocialAPI()
 
 
 const user = {
-    name: "fakeuser",
-    email: "fake@stud.noroff.no",
-    password: "fake1234"
+    name: "fakeuserr",
+    email: "fakee@stud.noroff.no",
+    password: "fakee1234"
 }
 
-await api.auth.register(user)
+// await api.auth.register(user)
 
-// test log in
+await api.auth.login({ email: user.email, password: user.password})
+
 
 // after creating social/post in class - test create, update, read, delete 
 
