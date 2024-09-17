@@ -11,12 +11,14 @@ export default async function router(pathname = window.location.pathname) {
       break;
     case "/auth/login/":
       await import("./views/login.js");
+      // set eventListener on "submit" login button eks from live session: document.forms.login.addEventListener("submit", onLogin)
       break;
     case "/auth/register/":
       await import("./views/register.js");
       break;
     case "/post/":
       await import("./views/post.js");
+      // eks from live session: await onViewPost(postId)
       break;
     case "/post/edit/":
       await import("./views/postEdit.js");
