@@ -8,16 +8,13 @@ await router(window.location.pathname);
 const api = new SocialAPI()
 
 
-const user = {
-    name: "fakeuserr",
-    email: "fakee@stud.noroff.no",
-    password: "fakee1234"
-}
 
-// await api.auth.register(user)
+// Test logging in with a test user:
+// const user = {
+//     name: "fakeuserr",
+//     email: "fakee@stud.noroff.no",
+//     password: "fakee1234"
+//  }
+// await api.auth.login({ email: user.email, password: user.password})
 
-await api.auth.login({ email: user.email, password: user.password})
-
-
-// after creating social/post in class - test create, update, read, delete 
 
