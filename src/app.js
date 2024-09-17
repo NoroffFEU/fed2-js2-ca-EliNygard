@@ -1,7 +1,7 @@
 import "./css/style.css";
 
 import router from "./js/router/index.js";
-import api from "./js/api/instance.js"
+import api from "./js/api/instance.js";
 
 await router(window.location.pathname);
 
@@ -12,5 +12,3 @@ await router(window.location.pathname);
 //     password: "fakee1234"
 //  }
 // await api.auth.login({ email: user.email, password: user.password})
-
-
