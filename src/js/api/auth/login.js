@@ -1,3 +1,5 @@
+// can this file be deleted? Now part of the class SocialAPI
+
 import { API_AUTH_LOGIN } from "../constants";
 
 export async function login({ email, password }) {
