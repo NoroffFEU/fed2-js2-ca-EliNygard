@@ -121,7 +121,7 @@ export default class SocialAPI {
 
   post = {
     create: async( { title, body }) => {
-      const response = await fetch("https://v2.api.noroff.dev/social/posts", {
+      const response = await fetch(this.apiPostPath, {
         headers: {
           "Content-type": "application/json",
           Authorization: `Bearer ${localStorage.token}`,
