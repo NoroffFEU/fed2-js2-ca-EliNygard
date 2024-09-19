@@ -135,6 +135,24 @@ export default class SocialAPI {
       } 
         
       throw new Error(error)
+    },
+    read: async(id) => { 
+
+      const response = await fetch(`${this.apiPostPath}/${id}`, {
+        headers: {
+          "Content-type": "application/json",
+          Authorization: `Bearer ${localStorage.token}`,
+          "X-Noroff-API-Key": API_KEY,
+        },
+        method: "get",
+      })
+
+      if (response.ok) {
+        const { data } = await response.json()
+        return data;
+      }
+
+      throw new Error("Could not fetch post")
     }
   }
 }
