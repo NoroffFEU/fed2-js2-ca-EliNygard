@@ -1,3 +1,5 @@
+import { API_KEY } from "./constants";
+
 /**
  * A class representing the SocialAPI service for authentication.
  * This class provides methods to interact with the authentication API for registering, logging in and logging out users.
@@ -23,6 +25,10 @@ export default class SocialAPI {
   }
   get apiLoginPath() {
     return `${this.apiBase}/auth/login`;
+  }
+
+  get apiPostPath() {
+    return `${this.apiBase}/social/posts`
   }
 
   /**
@@ -112,4 +118,23 @@ export default class SocialAPI {
       window.location.href = "/auth/login/";
     },
   };
+
+  post = {
+    create: async( { title, body }) => {
+      const response = await fetch("https://v2.api.noroff.dev/social/posts", {
+        headers: {
+          "Content-type": "application/json",
+          Authorization: `Bearer ${localStorage.token}`,
+          "X-Noroff-API-Key": API_KEY,
+        },
+        method: "post",
+        body: JSON.stringify({ title, body })
+      })
+      if (response.ok) {
+        return await response.json()
+      } 
+        
+      throw new Error(error)
+    }
+  }
 }
