@@ -248,11 +248,11 @@ export default class SocialAPI {
     },
   };
 
-  profiles = {
+  profile = {
     currentProfile: {
       readPosts: async () => {
         const url = new URL(this.apiCurrentProfilePostsPath);
-  
+
         const response = await fetch(url, {
           headers: {
             "Content-type": "application/json",
@@ -267,7 +267,8 @@ export default class SocialAPI {
         throw new Error("Could not fetch posts from profile");
       },
     },
-
+  };
+  profiles = {
     readProfiles: async () => {
       const url = new URL(this.apiAllProfiles);
 
@@ -279,10 +280,10 @@ export default class SocialAPI {
         },
       });
       if (response.ok) {
-        const { data } = await response.json()
+        const { data } = await response.json();
         return data;
       }
-      throw new Error("Could not get profiles", error)
+      throw new Error("Could not get profiles", error);
     },
   };
 }
