@@ -47,10 +47,13 @@ export default class SocialAPI {
     return `${this.apiBase}/social/posts`;
   }
 
-  get apiCurrentProfilePostsPath() {
-    return `${this.apiBase}/social/profiles/${this.user.name}/posts`;
+  get apiAllProfiles() {
+    return `${this.apiBase}/social/profiles`;
   }
 
+  get apiCurrentProfilePostsPath() {
+    return `${this.apiAllProfiles}/${this.user.name}/posts`;
+  }
 
   /**
    * The authentication methods for the SocialAPI.
@@ -261,6 +264,23 @@ export default class SocialAPI {
         return data;
       }
       throw new Error("Could not fetch posts from profile");
+    },
+
+    allProfiles: async () => {
+      const url = new URL(this.apiAllProfiles);
+
+      const response = await fetch(url, {
+        headers: {
+          "Content-type": "application/json",
+          Authorization: `Bearer ${localStorage.token}`,
+          "X-Noroff-API-Key": API_KEY,
+        },
+      });
+      if (response.ok) {
+        const { data } = await response.json()
+        return data;
+      }
+      throw new Error("Could not get profiles", error)
     },
   };
 }

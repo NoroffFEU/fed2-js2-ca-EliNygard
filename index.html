@@ -1,25 +1,30 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
+  <head>
+    <meta charset="UTF-8" />
 
-<head>
-  <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Home</title>
+    <script type="module" src="./src/app.js"></script>
+  </head>
 
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Home</title>
-  <script type="module" src="./src/app.js"></script>
-</head>
+  <body>
+    <img src="./public/images/noroff-logo.png" alt="Noroff Logo" />
 
-<body>
-  <img src="./public/images/noroff-logo.png" alt="Noroff Logo" />
+    <a href="./profile/">My Profile</a>
+    <a href="./auth/login/">Login</a>
+    <a href="./auth/register/">Register</a>
+    <button id="logout-btn">Logout</button>
 
+    <section>
+      <details>
+        <summary>All Profiles</summary>
+        <ul id="profilesAll"></ul>
+      </details>
+    </section>
 
-  <a href="./profile/">My Profile</a>
-  <a href="./auth/login/">Login</a>
-  <a href="./auth/register/">Register</a>
-  <button id="logout-btn">Logout</button>
-
-  <section id="postsAll">
-    <h2>All posts</h2>
-  </section>
-</body>
+    <section id="postsAll">
+      <h2>All posts</h2>
+    </section>
+  </body>
 </html>
