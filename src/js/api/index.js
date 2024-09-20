@@ -148,6 +148,24 @@ export default class SocialAPI {
 
       throw new Error(error);
     },
+
+    edit: async (id, { title, body }) => {
+      const response = await fetch(`${this.apiPostPath}/${id}`, {
+        headers: {
+          "Content-type": "application/json",
+          Authorization: `Bearer ${localStorage.token}`,
+          "X-Noroff-API-Key": API_KEY,
+        },
+        method: "put",
+        body: JSON.stringify({ title, body }),
+      });
+
+      if (response.ok) {
+        return await response.json();
+      }
+      throw new Error("Could not update post " + id)
+    },
+
     read: async (id) => {
       const response = await fetch(`${this.apiPostPath}/${id}`, {
         headers: {
@@ -191,21 +209,21 @@ export default class SocialAPI {
   };
 
   profiles = {
-    posts: async() => {
-      const url = new URL(this.apiProfilePostsPath)
+    posts: async () => {
+      const url = new URL(this.apiProfilePostsPath);
 
       const response = await fetch(url, {
         headers: {
           "Content-type": "application/json",
           Authorization: `Bearer ${localStorage.token}`,
           "X-Noroff-API-Key": API_KEY,
-        }
-      })
+        },
+      });
       if (response.ok) {
-        const { data } = await response.json()
-        return data
+        const { data } = await response.json();
+        return data;
       }
-      throw new Error("Could not fetch posts from profile")
-    }
+      throw new Error("Could not fetch posts from profile");
+    },
   };
 }
