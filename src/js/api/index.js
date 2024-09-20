@@ -47,9 +47,10 @@ export default class SocialAPI {
     return `${this.apiBase}/social/posts`;
   }
 
-  get apiProfilePostsPath() {
+  get apiCurrentProfilePostsPath() {
     return `${this.apiBase}/social/profiles/${this.user.name}/posts`;
   }
+
 
   /**
    * The authentication methods for the SocialAPI.
@@ -246,7 +247,7 @@ export default class SocialAPI {
 
   profiles = {
     posts: async () => {
-      const url = new URL(this.apiProfilePostsPath);
+      const url = new URL(this.apiCurrentProfilePostsPath);
 
       const response = await fetch(url, {
         headers: {
