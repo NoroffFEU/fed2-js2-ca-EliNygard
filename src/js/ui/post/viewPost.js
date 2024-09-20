@@ -29,7 +29,8 @@ export async function viewPost() {
     const p = document.createElement("p");
     p.textContent = post.body;
 
-    const btnEdit = document.createElement("button");
+    const btnEdit = document.createElement("a");
+    btnEdit.href = "/post/edit/"
     btnEdit.textContent = "Edit";
 
     const btnDelete = document.createElement("button");
@@ -38,6 +39,8 @@ export async function viewPost() {
     section.append(h2, p, btnEdit, btnDelete);
 
     document.querySelector("body").appendChild(section);
+
+    localStorage.setItem("id", id)
   } catch (error) {
     console.error(error);
   }

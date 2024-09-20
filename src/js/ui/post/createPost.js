@@ -11,6 +11,6 @@ export async function onCreatePost(event) {
         
         window.location.href = `/post/?id=${post.id}`
     } catch(error) {
-        console.error();
+        console.error("Could not create post", error);
     }
 }

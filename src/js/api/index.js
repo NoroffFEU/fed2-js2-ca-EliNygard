@@ -149,7 +149,7 @@ export default class SocialAPI {
       throw new Error(error);
     },
 
-    edit: async (id, { title, body }) => {
+    update: async (id, { title, body }) => {
       const response = await fetch(`${this.apiPostPath}/${id}`, {
         headers: {
           "Content-type": "application/json",
@@ -183,6 +183,18 @@ export default class SocialAPI {
 
       throw new Error("Could not fetch post");
     },
+
+    loadPostData: async (id, form) => {
+      try {
+        const post = await this.post.read(id)
+
+        form.querySelector("#title").value = post.title;
+        form.querySelector("#body").value = post.body;
+      } catch(error) {
+        console.error("Error fetching post data", error);
+        
+      }
+    }
   };
 
   posts = {
