@@ -249,24 +249,26 @@ export default class SocialAPI {
   };
 
   profiles = {
-    posts: async () => {
-      const url = new URL(this.apiCurrentProfilePostsPath);
-
-      const response = await fetch(url, {
-        headers: {
-          "Content-type": "application/json",
-          Authorization: `Bearer ${localStorage.token}`,
-          "X-Noroff-API-Key": API_KEY,
-        },
-      });
-      if (response.ok) {
-        const { data } = await response.json();
-        return data;
-      }
-      throw new Error("Could not fetch posts from profile");
+    currentProfile: {
+      readPosts: async () => {
+        const url = new URL(this.apiCurrentProfilePostsPath);
+  
+        const response = await fetch(url, {
+          headers: {
+            "Content-type": "application/json",
+            Authorization: `Bearer ${localStorage.token}`,
+            "X-Noroff-API-Key": API_KEY,
+          },
+        });
+        if (response.ok) {
+          const { data } = await response.json();
+          return data;
+        }
+        throw new Error("Could not fetch posts from profile");
+      },
     },
 
-    allProfiles: async () => {
+    readProfiles: async () => {
       const url = new URL(this.apiAllProfiles);
 
       const response = await fetch(url, {
