@@ -20,6 +20,14 @@ export default class SocialAPI {
     this.apiBase = apiBase;
   }
 
+  get user() {
+    try {
+      return JSON.parse(localStorage.user);
+    } catch {
+      return null;
+    }
+  }
+
   get apiRegisterPath() {
     return `${this.apiBase}/auth/register`;
   }
@@ -29,6 +37,10 @@ export default class SocialAPI {
 
   get apiPostPath() {
     return `${this.apiBase}/social/posts`;
+  }
+
+  get apiProfilePostsPath() {
+    return `${this.apiBase}/social/profiles/${this.user.name}/posts`;
   }
 
   /**
@@ -179,6 +191,21 @@ export default class SocialAPI {
   };
 
   profiles = {
-    
-  }
+    posts: async() => {
+      const url = new URL(this.apiProfilePostsPath)
+
+      const response = await fetch(url, {
+        headers: {
+          "Content-type": "application/json",
+          Authorization: `Bearer ${localStorage.token}`,
+          "X-Noroff-API-Key": API_KEY,
+        }
+      })
+      if (response.ok) {
+        const { data } = await response.json()
+        return data
+      }
+      throw new Error("Could not fetch posts from profile")
+    }
+  };
 }
