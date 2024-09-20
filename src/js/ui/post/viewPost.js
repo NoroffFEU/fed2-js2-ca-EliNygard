@@ -1,35 +1,44 @@
-import api from "../../api/instance.js"
+import api from "../../api/instance.js";
 
+/**
+ * Fetches and displays a specific post on the page based on the URL's query parameter.
+ *
+ * This function retrieves a post's ID from the URL search parameters, fetches the post from the API,
+ * and dynamically creates and appends a section to the DOM displaying the post's title and body.
+ * It also adds "Edit" and "Delete" buttons for the post.
+ *
+ * @async
+ * @function viewPost
+ * @returns {Promise<void>} Resolves when the post is successfully fetched and rendered to the DOM.
+ * @throws {Error} Logs any error that occurs during the post fetch or DOM manipulation.
+ */
 export async function viewPost() {
-    try {
-        const parameterString = window.location.search;
-        const searchParameters = new URLSearchParams(parameterString)
-        const id = searchParameters.get("id")
+  try {
+    const parameterString = window.location.search;
+    const searchParameters = new URLSearchParams(parameterString);
+    const id = searchParameters.get("id");
 
-        const post = await api.post.read(id)
-        console.log(post);
+    const post = await api.post.read(id);
+    console.log(post);
 
-        const section = document.createElement("section")
-        
-        const h2 = document.createElement("h2")
-        h2.textContent = post.title
+    const section = document.createElement("section");
 
-        const p = document.createElement("p")
-        p.textContent = post.body;
+    const h2 = document.createElement("h2");
+    h2.textContent = post.title;
 
-        const btnEdit = document.createElement("button")
-        btnEdit.textContent = "Edit"
+    const p = document.createElement("p");
+    p.textContent = post.body;
 
-        const btnDelete = document.createElement("button")
-        btnDelete.textContent = "Delete"
+    const btnEdit = document.createElement("button");
+    btnEdit.textContent = "Edit";
 
-        section.append(h2, p, btnEdit, btnDelete)
+    const btnDelete = document.createElement("button");
+    btnDelete.textContent = "Delete";
 
-        document.querySelector("body").appendChild(section)
+    section.append(h2, p, btnEdit, btnDelete);
 
-
-    } catch(error) {
-        console.error(error);
-        
-    }
+    document.querySelector("body").appendChild(section);
+  } catch (error) {
+    console.error(error);
+  }
 }
