@@ -2,11 +2,14 @@ import api from "../../api/instance.js";
 
 export async function viewProfiles() {
   try {
-    const profiles = await api.profiles.allProfiles();
+    const profiles = await api.profiles.readProfiles();
 
     const list = profiles.map((profile) => {
       const li = document.createElement("li");
-      li.innerText = profile.name;
+      const a = document.createElement("a")
+      a.href = `/profile?profile=${profile.name}`
+      a.innerText = profile.name;
+      li.appendChild(a)
       return li;
     });
 
