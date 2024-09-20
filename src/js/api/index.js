@@ -30,7 +30,7 @@ export default class SocialAPI {
 
   get id() {
     try {
-      return JSON.parse(localStorage.id)
+      return JSON.parse(localStorage.id);
     } catch {
       return null;
     }
@@ -171,7 +171,7 @@ export default class SocialAPI {
       if (response.ok) {
         return await response.json();
       }
-      throw new Error("Could not update post " + id)
+      throw new Error("Could not update post " + id);
     },
 
     read: async (id) => {
@@ -194,21 +194,14 @@ export default class SocialAPI {
 
     loadPostData: async (id, form) => {
       try {
-        const post = await this.post.read(id)
-        console.log(post);
-        
+        const post = await this.post.read(id);
 
         form.querySelector("#title").value = post.title;
         form.querySelector("#body").value = post.body;
-        console.log(post.title);
-        console.log(post.body);
-        
-        
-      } catch(error) {
+      } catch (error) {
         console.error("Error fetching post data", error);
-        
       }
-    }
+    },
   };
 
   posts = {
