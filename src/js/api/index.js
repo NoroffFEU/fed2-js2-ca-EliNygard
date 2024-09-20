@@ -269,8 +269,11 @@ export default class SocialAPI {
     },
   };
   profiles = {
-    readProfiles: async () => {
+    readProfiles: async (limit= 20, page = 1) => {
       const url = new URL(this.apiAllProfiles);
+
+      url.searchParams.append("limit", limit)
+      url.searchParams.append("page", page)
 
       const response = await fetch(url, {
         headers: {
