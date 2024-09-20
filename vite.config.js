@@ -3,7 +3,8 @@ import { defineConfig } from "vite";
 
 export default defineConfig({
   appType: "mpa",
-  base: "/fed2-js2-ca-EliNygard/",
+  base: "/",
+  // github pages does not work with css
   build: {
     target: "esnext",
     rollupOptions: {
