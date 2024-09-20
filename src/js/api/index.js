@@ -28,7 +28,7 @@ export default class SocialAPI {
   }
 
   get apiPostPath() {
-    return `${this.apiBase}/social/posts`
+    return `${this.apiBase}/social/posts`;
   }
 
   /**
@@ -120,7 +120,7 @@ export default class SocialAPI {
   };
 
   post = {
-    create: async( { title, body }) => {
+    create: async ({ title, body }) => {
       const response = await fetch(this.apiPostPath, {
         headers: {
           "Content-type": "application/json",
@@ -128,16 +128,15 @@ export default class SocialAPI {
           "X-Noroff-API-Key": API_KEY,
         },
         method: "post",
-        body: JSON.stringify({ title, body })
-      })
+        body: JSON.stringify({ title, body }),
+      });
       if (response.ok) {
-        return await response.json()
-      } 
-        
-      throw new Error(error)
-    },
-    read: async(id) => { 
+        return await response.json();
+      }
 
+      throw new Error(error);
+    },
+    read: async (id) => {
       const response = await fetch(`${this.apiPostPath}/${id}`, {
         headers: {
           "Content-type": "application/json",
@@ -145,14 +144,41 @@ export default class SocialAPI {
           "X-Noroff-API-Key": API_KEY,
         },
         method: "get",
-      })
+      });
 
       if (response.ok) {
-        const { data } = await response.json()
+        const { data } = await response.json();
         return data;
       }
 
-      throw new Error("Could not fetch post")
-    }
+      throw new Error("Could not fetch post");
+    },
+  };
+
+  posts = {
+    read: async (limit = 12, page = 1) => {
+      const url = new URL(this.apiPostPath);
+
+      url.searchParams.append("limit", limit);
+      url.searchParams.append("page", page);
+
+      const response = await fetch(url, {
+        headers: {
+          "Content-type": "application/json",
+          Authorization: `Bearer ${localStorage.token}`,
+          "X-Noroff-API-Key": API_KEY,
+        },
+      });
+
+      if (response.ok) {
+        const { data } = await response.json();
+        return data;
+      }
+      throw new Error("Could not fetch posts");
+    },
+  };
+
+  profiles = {
+    
   }
 }
