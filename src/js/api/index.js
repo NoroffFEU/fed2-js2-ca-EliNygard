@@ -174,6 +174,23 @@ export default class SocialAPI {
       throw new Error("Could not update post " + id);
     },
 
+    delete: async (id) => {
+      const response = await fetch(`${this.apiPostPath}/${id}`, {
+        headers: {
+          "Content-type": "application/json",
+          Authorization: `Bearer ${localStorage.token}`,
+          "X-Noroff-API-Key": API_KEY,
+        },
+        method: "delete",
+      });
+
+      if (response.ok) {
+        console.log("Post was deleted");
+        // const text = this.util.handleResponse(response, "text")
+        // return text
+      }
+    },
+
     read: async (id) => {
       const response = await fetch(`${this.apiPostPath}/${id}`, {
         headers: {

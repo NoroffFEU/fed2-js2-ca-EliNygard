@@ -1,4 +1,5 @@
 import api from "../../api/instance.js";
+import { onDeletePost } from "./deletePost.js";
 
 /**
  * Fetches and displays a specific post on the page based on the URL's query parameter.
@@ -19,7 +20,6 @@ export async function viewPost() {
     const id = searchParameters.get("id");
 
     const post = await api.post.read(id);
-    console.log(post);
 
     const section = document.createElement("section");
 
@@ -35,6 +35,7 @@ export async function viewPost() {
 
     const btnDelete = document.createElement("button");
     btnDelete.textContent = "Delete";
+    btnDelete.addEventListener("click", () => onDeletePost())
 
     section.append(h2, p, btnEdit, btnDelete);
 
