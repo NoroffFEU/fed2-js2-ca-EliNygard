@@ -3,7 +3,6 @@ import api from "../../api/instance.js";
 export async function viewPostsByProfile() {
   try {
     const posts = await api.profiles.posts();
-    console.log(posts);
 
     const list = posts.map((post) => {
       const li = document.createElement("li");
