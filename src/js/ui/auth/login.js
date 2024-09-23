@@ -12,7 +12,7 @@ export async function onLogin(event) {
 
     try {
         await api.auth.login(data)
-        loginSuccessful(true)
+        loginSuccessful = true
     } catch (error) {
         console.error(error);
         alert(error)
@@ -21,5 +21,6 @@ export async function onLogin(event) {
         if (loginSuccessful) {
             window.location.href= "/"
         }
+        //hide loader
     }
 }
