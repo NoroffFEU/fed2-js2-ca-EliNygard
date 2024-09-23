@@ -20,7 +20,7 @@ export async function viewPostsAll() {
         img.alt = post.media.alt;
       }
 
-      li.append(h3, img);
+      li.append(img, h3);
       return li;
     });
 
