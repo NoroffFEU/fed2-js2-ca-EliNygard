@@ -6,9 +6,7 @@ export async function viewProfiles() {
     const profiles = await api.profiles.readProfiles();
 
     const list = profiles.map((profile) => {
-      // localStorage.setItem("currentProfile", profile.name)
-      // console.log(localStorage.getItem("currentProfile"));
-      
+            
       const li = document.createElement("li");
       
       const a = document.createElement("a")
@@ -17,7 +15,7 @@ export async function viewProfiles() {
       
       const btnFollow = document.createElement("button")
       btnFollow.textContent = "Follow"
-      btnFollow.addEventListener("click", () => onFollowProfile())
+      btnFollow.addEventListener("click", () => onFollowProfile(profile))
 
 
       const btnPosts = document.createElement("button")

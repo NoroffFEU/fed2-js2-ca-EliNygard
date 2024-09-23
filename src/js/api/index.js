@@ -301,6 +301,8 @@ export default class SocialAPI {
     },
     follow: async (profile) => {
       const url = new URL(`${this.apiAllProfiles}/${profile}/follow`)
+      console.log(url);
+      
 
       const response = await fetch(url, {
         headers: {
@@ -314,6 +316,7 @@ export default class SocialAPI {
         const { data } = await response.json()
         return data; 
       }
+      throw new Error("You are already following this profile.")
     }
   };
 }
