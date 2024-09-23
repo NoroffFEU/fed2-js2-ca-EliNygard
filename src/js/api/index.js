@@ -269,7 +269,7 @@ export default class SocialAPI {
     },
 
     readFollowing: async (limit = 12, page = 1) => {
-      const url = new URL(this.apiPostsFollowing);
+      const url = new URL(`${this.apiPostsFollowing}${this.apiPostsQueryParameters}`);
 
       url.searchParams.append("limit", limit);
       url.searchParams.append("page", page);
