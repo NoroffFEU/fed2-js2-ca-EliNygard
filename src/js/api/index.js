@@ -246,6 +246,7 @@ export default class SocialAPI {
           Authorization: `Bearer ${localStorage.token}`,
           "X-Noroff-API-Key": API_KEY,
         },
+        method: "get"
       });
 
       if (response.ok) {
@@ -267,6 +268,7 @@ export default class SocialAPI {
             Authorization: `Bearer ${localStorage.token}`,
             "X-Noroff-API-Key": API_KEY,
           },
+          method:"get"
         });
         if (response.ok) {
           const { data } = await response.json();
@@ -289,6 +291,7 @@ export default class SocialAPI {
           Authorization: `Bearer ${localStorage.token}`,
           "X-Noroff-API-Key": API_KEY,
         },
+        method: "get"
       });
       if (response.ok) {
         const { data } = await response.json();
@@ -305,6 +308,7 @@ export default class SocialAPI {
           Authorization: `Bearer ${localStorage.token}`,
           "X-Noroff-API-Key": API_KEY,
         },
+        method: "put"
       })
       if (response.ok) {
         const { data } = await response.json()
