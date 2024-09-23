@@ -55,6 +55,7 @@ export default class SocialAPI {
     return `${this.apiAllProfiles}/${this.user.name}/posts`;
   }
 
+
   /**
    * The authentication methods for the SocialAPI.
    * @property {function} register - Registers a new user with the provided information.
@@ -288,5 +289,8 @@ export default class SocialAPI {
       }
       throw new Error("Could not get profiles", error);
     },
+    follow: async (profile) => {
+      const url = new URL(`${this.apiAllProfiles}/${profile}/follow`)
+    }
   };
 }

@@ -6,10 +6,16 @@ export async function viewProfiles() {
 
     const list = profiles.map((profile) => {
       const li = document.createElement("li");
+      
       const a = document.createElement("a")
       a.href = `/profile?profile=${profile.name}`
       a.innerText = profile.name;
-      li.appendChild(a)
+      
+      const btnFollow = document.createElement("button")
+      btnFollow.textContent = "Follow/unfollow"
+
+      li.append(a, btnFollow)
+      
       return li;
     });
 
