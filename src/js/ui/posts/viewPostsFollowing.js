@@ -4,17 +4,15 @@ export async function viewPostsFollowing() {
   try {
     const posts = await api.posts.readFollowing();
     console.log(posts);
-    
 
     const list = posts.map((post) => {
-        
       const li = document.createElement("li");
 
       const h3 = document.createElement("h3");
       h3.textContent = post.title;
 
-      const author = document.createElement("p")
-      author.textContent = `Author: ${post.author.name}`
+      const author = document.createElement("p");
+      author.textContent = `Author: ${post.author.name}`;
 
       const img = document.createElement("img");
       img.src =
@@ -26,10 +24,13 @@ export async function viewPostsFollowing() {
         img.alt = post.media.alt;
       };
 
-      const btnComment = document.createElement("button")
-      btnComment.textContent = "Comment"
+      const btnComment = document.createElement("button");
+      btnComment.textContent = "Comment";
 
-      li.append(img, btnComment, h3, author);
+      const xComments = document.createElement("p");
+      xComments.textContent = `Comments: ${post._count.comments}`;
+
+      li.append(img, xComments, btnComment, h3, author);
       return li;
     });
     document.getElementById("postsFollowing").append(...list);
