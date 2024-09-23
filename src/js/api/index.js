@@ -277,7 +277,7 @@ export default class SocialAPI {
 
       if (response.ok) {
         const { data } = await response.json();
-        
+
         return data;
       }
       throw new Error("Could not fetch posts from the following profiles");
@@ -328,7 +328,6 @@ export default class SocialAPI {
     },
     follow: async (profile) => {
       const url = new URL(`${this.apiAllProfiles}/${profile}/follow`);
-      console.log(url);
 
       const response = await fetch(url, {
         headers: {
@@ -343,6 +342,24 @@ export default class SocialAPI {
         return data;
       }
       throw new Error("You are already following this profile.");
+    },
+
+    unfollow: async (profile) => {
+      const url = new URL(`${this.apiAllProfiles}/${profile}/unfollow`);
+
+      const response = await fetch(url, {
+        headers: {
+          "Content-type": "application/json",
+          Authorization: `Bearer ${localStorage.token}`,
+          "X-Noroff-API-Key": API_KEY,
+        },
+        method: "put",
+      });
+      if (response.ok) {
+        const { data } = await response.json();
+        return data;
+      }
+      throw new Error("You are not following this profile.");
     },
   };
 }

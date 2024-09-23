@@ -1,5 +1,6 @@
 import api from "../../api/instance.js";
 import { onFollowProfile } from "./followProfile.js";
+import { onUnfollowProfile } from "./unfollowProfile.js";
 
 export async function viewProfiles() {
   try {
@@ -17,11 +18,14 @@ export async function viewProfiles() {
       btnFollow.textContent = "Follow"
       btnFollow.addEventListener("click", () => onFollowProfile(profile))
 
+      const btnUnfollow = document.createElement("button")
+      btnUnfollow.textContent = "Unfollow"
+      btnUnfollow.addEventListener("click", () => onUnfollowProfile(profile))
 
       const btnPosts = document.createElement("button")
       btnPosts.textContent = "View posts"
 
-      li.append(a, btnFollow, btnPosts)
+      li.append(a, btnFollow, btnUnfollow, btnPosts)
       
       return li;
     });
