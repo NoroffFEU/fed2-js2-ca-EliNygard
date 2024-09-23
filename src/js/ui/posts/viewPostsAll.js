@@ -3,6 +3,8 @@ import api from "../../api/instance.js";
 export async function viewPostsAll() {
   try {
     const posts = await api.posts.read();
+    console.log(posts);
+    
     
 
     const li = posts.map((post) => {

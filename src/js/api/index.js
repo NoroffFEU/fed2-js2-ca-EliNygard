@@ -59,6 +59,14 @@ export default class SocialAPI {
     return `${this.apiPostPath}/following`;
   }
 
+  get apiPostsQueryParameters() {
+    return `?_author=true&_comments=true&_reactions=true`
+  }
+
+  get apiProfilesQueryParameters() {
+    return `?_following=true&_followers=true&_posts=true`
+  }
+
   /**
    * The authentication methods for the SocialAPI.
    * @property {function} register - Registers a new user with the provided information.
@@ -208,7 +216,7 @@ export default class SocialAPI {
     },
 
     read: async (id) => {
-      const response = await fetch(`${this.apiPostPath}/${id}`, {
+      const response = await fetch(`${this.apiPostPath}/${id}${this.apiPostsQueryParameters}`, {
         headers: {
           "Content-type": "application/json",
           Authorization: `Bearer ${localStorage.token}`,
@@ -239,7 +247,7 @@ export default class SocialAPI {
 
   posts = {
     read: async (limit = 12, page = 1) => {
-      const url = new URL(this.apiPostPath);
+      const url = new URL(`${this.apiPostPath}${this.apiPostsQueryParameters}`);
 
       url.searchParams.append("limit", limit);
       url.searchParams.append("page", page);
@@ -287,7 +295,7 @@ export default class SocialAPI {
   profile = {
     currentProfile: {
       readPosts: async () => {
-        const url = new URL(this.apiCurrentProfilePostsPath);
+        const url = new URL(`${this.apiCurrentProfilePostsPath}${this.apiProfilesQueryParameters}`);
 
         const response = await fetch(url, {
           headers: {
@@ -307,7 +315,7 @@ export default class SocialAPI {
   };
   profiles = {
     readProfiles: async (limit = 20, page = 1) => {
-      const url = new URL(this.apiAllProfiles);
+      const url = new URL(`${this.apiAllProfiles}${this.apiProfilesQueryParameters}`);
 
       url.searchParams.append("limit", limit);
       url.searchParams.append("page", page);
