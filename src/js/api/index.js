@@ -100,7 +100,7 @@ export default class SocialAPI {
         return data;
       }
 
-      throw new Error("Something went wrong. Could not register account.");
+      throw new Error("Something went wrong. Could not register account. Please try again.");
     },
     /**
      * Logs in a user.
@@ -131,16 +131,22 @@ export default class SocialAPI {
         return data;
       }
 
-      throw new Error("Error");
+      throw new Error("Could not login. Please try again or register a user.");
     },
     /**
      * Logs out the current user by clearing the token and user data from local storage.
      * The user is then redirected to the home page.
      */
     logout: () => {
-      localStorage.removeItem("token");
-      localStorage.removeItem("user");
-      window.location.href = "/auth/login/";
+      try {
+        localStorage.removeItem("token");
+        localStorage.removeItem("user");
+        window.location.href = "/auth/login/";
+
+      } catch(error) {
+        console.error(error);
+        alert("Could not logout. Please try again.")
+      }
     },
   };
 
@@ -194,6 +200,7 @@ export default class SocialAPI {
         // const text = this.util.handleResponse(response, "text")
         // return text
       }
+      throw new Error("Could not delete post with" + id)
     },
 
     read: async (id) => {

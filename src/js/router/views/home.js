@@ -1,9 +1,9 @@
-import { setLogoutListener } from "../../ui/global/logout";
+import { onLogout } from "../../ui/auth/logout";
 import { viewPostsAll } from "../../ui/posts/viewPostsAll";
 import { viewProfiles } from "../../ui/profile/viewProfiles";
 import { authGuard } from "../../utilities/authGuard";
 
 authGuard();
-setLogoutListener();
+onLogout()
 viewPostsAll()
 viewProfiles()

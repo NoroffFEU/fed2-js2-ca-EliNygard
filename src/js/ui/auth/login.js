@@ -6,14 +6,20 @@ export async function onLogin(event) {
     const formData = new FormData(form)
     const data = Object.fromEntries(formData.entries())
 
+    let loginSuccessful = false
+
     //show loader
 
     try {
         await api.auth.login(data)
+        loginSuccessful(true)
     } catch (error) {
-        console.error(error.messages);
+        console.error(error);
         alert(error)
+        window.location.href = "/auth/login/"
     } finally {
-        window.location.href= "/"
+        if (loginSuccessful) {
+            window.location.href= "/"
+        }
     }
 }
