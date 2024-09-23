@@ -55,6 +55,9 @@ export default class SocialAPI {
     return `${this.apiAllProfiles}/${this.user.name}/posts`;
   }
 
+  get apiPostsFollowing() {
+    return `${this.apiPostPath}/following`;
+  }
 
   /**
    * The authentication methods for the SocialAPI.
@@ -100,7 +103,9 @@ export default class SocialAPI {
         return data;
       }
 
-      throw new Error("Something went wrong. Could not register account. Please try again.");
+      throw new Error(
+        "Something went wrong. Could not register account. Please try again."
+      );
     },
     /**
      * Logs in a user.
@@ -142,10 +147,9 @@ export default class SocialAPI {
         localStorage.removeItem("token");
         localStorage.removeItem("user");
         window.location.href = "/auth/login/";
-
-      } catch(error) {
+      } catch (error) {
         console.error(error);
-        alert("Could not logout. Please try again.")
+        alert("Could not logout. Please try again.");
       }
     },
   };
@@ -200,7 +204,7 @@ export default class SocialAPI {
         // const text = this.util.handleResponse(response, "text")
         // return text
       }
-      throw new Error("Could not delete post with" + id)
+      throw new Error("Could not delete post with" + id);
     },
 
     read: async (id) => {
@@ -246,7 +250,7 @@ export default class SocialAPI {
           Authorization: `Bearer ${localStorage.token}`,
           "X-Noroff-API-Key": API_KEY,
         },
-        method: "get"
+        method: "get",
       });
 
       if (response.ok) {
@@ -254,6 +258,29 @@ export default class SocialAPI {
         return data;
       }
       throw new Error("Could not fetch posts");
+    },
+
+    readFollowing: async (limit = 12, page = 1) => {
+      const url = new URL(this.apiPostsFollowing);
+
+      url.searchParams.append("limit", limit);
+      url.searchParams.append("page", page);
+
+      const response = await fetch(url, {
+        headers: {
+          "Content-type": "application/json",
+          Authorization: `Bearer ${localStorage.token}`,
+          "X-Noroff-API-Key": API_KEY,
+        },
+        method: "get",
+      });
+
+      if (response.ok) {
+        const { data } = await response.json();
+        
+        return data;
+      }
+      throw new Error("Could not fetch posts from the following profiles");
     },
   };
 
@@ -268,7 +295,7 @@ export default class SocialAPI {
             Authorization: `Bearer ${localStorage.token}`,
             "X-Noroff-API-Key": API_KEY,
           },
-          method:"get"
+          method: "get",
         });
         if (response.ok) {
           const { data } = await response.json();
@@ -279,11 +306,11 @@ export default class SocialAPI {
     },
   };
   profiles = {
-    readProfiles: async (limit= 20, page = 1) => {
+    readProfiles: async (limit = 20, page = 1) => {
       const url = new URL(this.apiAllProfiles);
 
-      url.searchParams.append("limit", limit)
-      url.searchParams.append("page", page)
+      url.searchParams.append("limit", limit);
+      url.searchParams.append("page", page);
 
       const response = await fetch(url, {
         headers: {
@@ -291,7 +318,7 @@ export default class SocialAPI {
           Authorization: `Bearer ${localStorage.token}`,
           "X-Noroff-API-Key": API_KEY,
         },
-        method: "get"
+        method: "get",
       });
       if (response.ok) {
         const { data } = await response.json();
@@ -300,9 +327,8 @@ export default class SocialAPI {
       throw new Error("Could not get profiles", error);
     },
     follow: async (profile) => {
-      const url = new URL(`${this.apiAllProfiles}/${profile}/follow`)
+      const url = new URL(`${this.apiAllProfiles}/${profile}/follow`);
       console.log(url);
-      
 
       const response = await fetch(url, {
         headers: {
@@ -310,13 +336,13 @@ export default class SocialAPI {
           Authorization: `Bearer ${localStorage.token}`,
           "X-Noroff-API-Key": API_KEY,
         },
-        method: "put"
-      })
+        method: "put",
+      });
       if (response.ok) {
-        const { data } = await response.json()
-        return data; 
+        const { data } = await response.json();
+        return data;
       }
-      throw new Error("You are already following this profile.")
-    }
+      throw new Error("You are already following this profile.");
+    },
   };
 }
