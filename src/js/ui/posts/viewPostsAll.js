@@ -3,17 +3,28 @@ import api from "../../api/instance.js";
 export async function viewPostsAll() {
   try {
     const posts = await api.posts.read();
+    
 
     const li = posts.map((post) => {
       const li = document.createElement("li");
-      const a = document.createElement("a");
-      a.href = `/post/?id=${post.id}`;
-      a.innerText = post.title;
-      li.append(a);
+      
+      const h3 = document.createElement("h3");
+      h3.textContent = post.title;
+
+      const img = document.createElement("img");
+
+      img.src = post.media && post.media.url ? post.media.url : "https://picsum.photos/id/14/200/300";
+
+      img.onerror = function () {
+        // img.src = "https://picsum.photos/id/14/200/300";
+        img.alt = post.media.alt;
+      }
+
+      li.append(h3, img);
       return li;
     });
 
-    document.getElementById("postsAll").append(...li)
+    document.getElementById("postsAll").append(...li);
   } catch (error) {
     console.error(error);
   }
