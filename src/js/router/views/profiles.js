@@ -1,20 +1,12 @@
-import { viewProfiles } from "../../ui/profiles/viewProfiles";
+import { loadFirstPage, loadNextPage, loadPreviousPage } from "../../ui/global/pagination.js";
+import { viewProfiles } from "../../ui/profiles/viewProfiles.js";
+import { currentPage } from "../../utilities/paginationStates.js";
 
-let currentPage = 1
-const limit = 40
+const limit = 10
 
-function loadNextPage() {
-    currentPage++
-    viewProfiles(limit, currentPage);
-}
-
-function loadPreviousPage() {
-    currentPage--
-    viewProfiles(limit, currentPage)
-}
-
-document.getElementById("prevPage").addEventListener("click", loadPreviousPage)
-document.getElementById("nextPage").addEventListener("click", loadNextPage)
+document.getElementById("prevPage").addEventListener("click", () => loadPreviousPage(limit))
+document.getElementById("nextPage").addEventListener("click", () => loadNextPage(limit))
+document.getElementById("firstPage").addEventListener("click", () => loadFirstPage())
 
 viewProfiles(limit, currentPage)
 
