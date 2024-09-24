@@ -26,17 +26,11 @@ export async function viewProfiles(limit, page) {
       const btnPosts = document.createElement("button");
       btnPosts.textContent = "View posts";
 
-      const btnProfile = document.createElement("button")
-      btnProfile.textContent = "View Profile"
-      btnProfile.addEventListener("click", () => {
-        window.location.href = `/profiles/profile/?${profile.name}`
-      } )
-
       const aProfile = document.createElement("a");
-      aProfile.href = `/profiles?profile=${profile.name}`;
+      aProfile.href = `/profiles/profile/?name=${profile.name}`;
       aProfile.textContent = "View Profile";
 
-      li.append(a, btnFollow, btnUnfollow, btnPosts, aProfile, btnProfile);
+      li.append(a, btnFollow, btnUnfollow, btnPosts, aProfile);
 
       return li;
     });
