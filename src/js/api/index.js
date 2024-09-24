@@ -47,14 +47,14 @@ export default class SocialAPI {
   get apiPostPath() {
     return `${this.apiBase}/social/posts`;
   }
-  
-    get apiPostsFollowing() {
-      return `${this.apiPostPath}/following`;
-    }
 
-    get apiPostsQueryParameters() {
-      return `?_author=true&_comments=true&_reactions=true`
-    }
+  get apiPostsFollowing() {
+    return `${this.apiPostPath}/following`;
+  }
+
+  get apiPostsQueryParameters() {
+    return `?_author=true&_comments=true&_reactions=true`;
+  }
 
   get apiProfilesPath() {
     return `${this.apiBase}/social/profiles`;
@@ -65,7 +65,7 @@ export default class SocialAPI {
   }
 
   get apiProfilesQueryParameters() {
-    return `?_following=true&_followers=true&_posts=true`
+    return `?_following=true&_followers=true&_posts=true`;
   }
 
   /**
@@ -209,20 +209,23 @@ export default class SocialAPI {
       });
 
       if (response.ok) {
-        return
+        return;
       }
       throw new Error("Could not delete post with id #" + id);
     },
 
     read: async (id) => {
-      const response = await fetch(`${this.apiPostPath}/${id}${this.apiPostsQueryParameters}`, {
-        headers: {
-          "Content-type": "application/json",
-          Authorization: `Bearer ${localStorage.token}`,
-          "X-Noroff-API-Key": API_KEY,
-        },
-        method: "get",
-      });
+      const response = await fetch(
+        `${this.apiPostPath}/${id}${this.apiPostsQueryParameters}`,
+        {
+          headers: {
+            "Content-type": "application/json",
+            Authorization: `Bearer ${localStorage.token}`,
+            "X-Noroff-API-Key": API_KEY,
+          },
+          method: "get",
+        }
+      );
 
       if (response.ok) {
         const { data } = await response.json();
@@ -268,7 +271,9 @@ export default class SocialAPI {
     },
 
     readFollowing: async (limit = 12, page = 1) => {
-      const url = new URL(`${this.apiPostsFollowing}${this.apiPostsQueryParameters}`);
+      const url = new URL(
+        `${this.apiPostsFollowing}${this.apiPostsQueryParameters}`
+      );
 
       url.searchParams.append("limit", limit);
       url.searchParams.append("page", page);
@@ -294,7 +299,9 @@ export default class SocialAPI {
   profile = {
     loggedInProfile: {
       readPosts: async () => {
-        const url = new URL(`${this.apiLoggedInProfilePostsPath}${this.apiProfilesQueryParameters}`);
+        const url = new URL(
+          `${this.apiLoggedInProfilePostsPath}${this.apiProfilesQueryParameters}`
+        );
 
         const response = await fetch(url, {
           headers: {
@@ -314,7 +321,9 @@ export default class SocialAPI {
   };
   profiles = {
     readAllProfiles: async (limit = 10, page = 1) => {
-      const url = new URL(`${this.apiProfilesPath}${this.apiProfilesQueryParameters}`);
+      const url = new URL(
+        `${this.apiProfilesPath}${this.apiProfilesQueryParameters}`
+      );
 
       url.searchParams.append("limit", limit);
       url.searchParams.append("page", page);
@@ -328,13 +337,16 @@ export default class SocialAPI {
         method: "get",
       });
       if (response.ok) {
-        const { data } = await response.json();
-        return data;
+        const { data, meta } = await response.json();
+
+        return { data, meta };
       }
-      throw new Error("Could not get profiles", error);
+      throw new Error("Could not get profiles");
     },
     readSingleProfile: async (profile) => {
-      const url = new URL(`${this.apiProfilesPath}/${profile}${this.apiProfilesQueryParameters}`)
+      const url = new URL(
+        `${this.apiProfilesPath}/${profile}${this.apiProfilesQueryParameters}`
+      );
 
       const response = await fetch(url, {
         headers: {
@@ -343,12 +355,12 @@ export default class SocialAPI {
           "X-Noroff-API-Key": API_KEY,
         },
         method: "get",
-      })
+      });
       if (response.ok) {
-        const { data } = await response.json()
-        return data
+        const { data } = await response.json();
+        return data;
       }
-      throw new Error("Could not get profile", error)
+      throw new Error("Could not get profile");
     },
     follow: async (profile) => {
       const url = new URL(`${this.apiProfilesPath}/${profile}/follow`);
