@@ -39,6 +39,7 @@ export default class SocialAPI {
   get apiRegisterPath() {
     return `${this.apiBase}/auth/register`;
   }
+
   get apiLoginPath() {
     return `${this.apiBase}/auth/login`;
   }
@@ -46,21 +47,25 @@ export default class SocialAPI {
   get apiPostPath() {
     return `${this.apiBase}/social/posts`;
   }
+  
+    get apiPostsFollowing() {
+      return `${this.apiPostPath}/following`;
+    }
+
+    get apiPostsQueryParameters() {
+      return `?_author=true&_comments=true&_reactions=true`
+    }
 
   get apiAllProfiles() {
     return `${this.apiBase}/social/profiles`;
   }
 
-  get apiCurrentProfilePostsPath() {
+  get apiLoggedInProfilePostsPath() {
     return `${this.apiAllProfiles}/${this.user.name}/posts`;
   }
 
-  get apiPostsFollowing() {
-    return `${this.apiPostPath}/following`;
-  }
-
-  get apiPostsQueryParameters() {
-    return `?_author=true&_comments=true&_reactions=true`
+  get apiSingleProfile() {
+    return `${this.apiAllProfiles}/${profile}`
   }
 
   get apiProfilesQueryParameters() {
@@ -293,9 +298,9 @@ export default class SocialAPI {
   };
 
   profile = {
-    currentProfile: {
+    loggedInProfile: {
       readPosts: async () => {
-        const url = new URL(`${this.apiCurrentProfilePostsPath}${this.apiProfilesQueryParameters}`);
+        const url = new URL(`${this.apiLoggedInProfilePostsPath}${this.apiProfilesQueryParameters}`);
 
         const response = await fetch(url, {
           headers: {
@@ -314,7 +319,7 @@ export default class SocialAPI {
     },
   };
   profiles = {
-    readProfiles: async (limit = 20, page = 1) => {
+    readAllProfiles: async (limit = 20, page = 1) => {
       const url = new URL(`${this.apiAllProfiles}${this.apiProfilesQueryParameters}`);
 
       url.searchParams.append("limit", limit);
@@ -333,6 +338,23 @@ export default class SocialAPI {
         return data;
       }
       throw new Error("Could not get profiles", error);
+    },
+    readSingleProfile: async (profile) => {
+      const url = new URL(`${this.apiSingleProfile}${this.apiProfilesQueryParameters}`)
+
+      const response = await fetch(url, {
+        headers: {
+          "Content-type": "application/json",
+          Authorization: `Bearer ${localStorage.token}`,
+          "X-Noroff-API-Key": API_KEY,
+        },
+        method: "get",
+      })
+      if (response.ok) {
+        const { data } = await response.json()
+        return data
+      }
+      throw new Error("Could not get profile", error)
     },
     follow: async (profile) => {
       const url = new URL(`${this.apiAllProfiles}/${profile}/follow`);
