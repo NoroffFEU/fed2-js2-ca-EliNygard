@@ -1,13 +1,42 @@
-// import api from "../../api/instance.js";
+import api from "../../api/instance.js";
 
-// export async function viewProfile(profile) {
-//     try {
-//         const profile = await api.profiles.readSingleProfile(profile);
-// console.log(profile);
+export async function viewProfile() {
+  console.log("single profile page");
+  try {
+    const parameterString = window.location.search;
 
-    
-//     } catch (error) {
-//         console.error();
-        
-//     }
-// }
+    const searchParameters = new URLSearchParams(parameterString);
+
+    const profileName = searchParameters.get("name");
+
+    const profile = await api.profiles.readSingleProfile(profileName);
+
+    console.log(profile);
+
+    const section = document.createElement("section")
+
+    const banner = document.createElement("img")
+    banner.classList.add("profile-banner")
+    banner.src = profile.banner.url
+
+    const avatar = document.createElement("img")
+    avatar.classList.add("profile-avatar")
+    avatar.src = profile.avatar.url
+
+    const name = document.createElement("h2")
+    name.textContent = profile.name
+
+    const bio = document.createElement("p")
+    bio.textContent = profile.bio
+
+    const countPosts = document.createElement("p")
+    countPosts.textContent = `${profile.name} has written ${profile._count.posts} posts.`
+
+    section.append(banner, avatar, name, bio, countPosts)
+
+    document.querySelector("body").appendChild(section)
+
+  } catch (error) {
+    console.error(error);
+  }
+}

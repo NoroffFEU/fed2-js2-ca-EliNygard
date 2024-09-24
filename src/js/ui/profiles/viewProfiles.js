@@ -12,7 +12,7 @@ export async function viewProfiles(limit, page) {
       const li = document.createElement("li");
 
       const a = document.createElement("a");
-      a.href = `/profiles?profile=${profile.name}`;
+      a.href = `/profiles/profile/?name=${profile.name}`;
       a.innerText = profile.name;
 
       const btnFollow = document.createElement("button");
@@ -26,11 +26,17 @@ export async function viewProfiles(limit, page) {
       const btnPosts = document.createElement("button");
       btnPosts.textContent = "View posts";
 
+      const btnProfile = document.createElement("button")
+      btnProfile.textContent = "View Profile"
+      btnProfile.addEventListener("click", () => {
+        window.location.href = `/profiles/profile/?${profile.name}`
+      } )
+
       const aProfile = document.createElement("a");
       aProfile.href = `/profiles?profile=${profile.name}`;
       aProfile.textContent = "View Profile";
 
-      li.append(a, btnFollow, btnUnfollow, btnPosts, aProfile);
+      li.append(a, btnFollow, btnUnfollow, btnPosts, aProfile, btnProfile);
 
       return li;
     });

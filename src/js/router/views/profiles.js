@@ -1,3 +1,4 @@
+import { viewProfile } from "../../ui/profiles/viewProfile.js";
 import { viewProfiles } from "../../ui/profiles/viewProfiles.js";
 
 

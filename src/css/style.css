@@ -13,3 +13,13 @@ li {
     height: 300px;
     object-fit: cover;
   }
+
+.profile-banner {
+  width: 500px;
+  object-fit: cover;
+}
+
+.profile-avatar {
+  width: 150px;
+  object-fit: cover;
+}

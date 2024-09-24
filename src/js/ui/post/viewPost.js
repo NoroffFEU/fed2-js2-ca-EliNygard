@@ -16,7 +16,9 @@ import { onDeletePost } from "./deletePost.js";
 export async function viewPost() {
   try {
     const parameterString = window.location.search;
+    
     const searchParameters = new URLSearchParams(parameterString);
+    
     const id = searchParameters.get("id");
 
     const post = await api.post.read(id);
