@@ -2,9 +2,9 @@ import api from "../../api/instance.js";
 import { onFollowProfile } from "./followProfile.js";
 import { onUnfollowProfile } from "./unfollowProfile.js";
 
-export async function viewProfiles() {
+export async function viewProfiles(limit = 10, page = 1) {
   try {
-    const profiles = await api.profiles.readAllProfiles();
+    const profiles = await api.profiles.readAllProfiles(limit, page);
 
     const list = profiles.map((profile) => {
             
@@ -34,6 +34,7 @@ export async function viewProfiles() {
       return li;
     });
 
+    document.getElementById("profilesAll").innerHTML = "";
     document.getElementById("profilesAll").append(...list);
   } catch (error) {
     console.error(error);

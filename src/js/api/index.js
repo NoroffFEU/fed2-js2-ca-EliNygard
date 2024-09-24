@@ -313,7 +313,7 @@ export default class SocialAPI {
     },
   };
   profiles = {
-    readAllProfiles: async (limit = 20, page = 1) => {
+    readAllProfiles: async (limit = 10, page = 1) => {
       const url = new URL(`${this.apiProfilesPath}${this.apiProfilesQueryParameters}`);
 
       url.searchParams.append("limit", limit);
