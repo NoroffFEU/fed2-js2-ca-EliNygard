@@ -56,16 +56,12 @@ export default class SocialAPI {
       return `?_author=true&_comments=true&_reactions=true`
     }
 
-  get apiAllProfiles() {
+  get apiProfilesPath() {
     return `${this.apiBase}/social/profiles`;
   }
 
   get apiLoggedInProfilePostsPath() {
-    return `${this.apiAllProfiles}/${this.user.name}/posts`;
-  }
-
-  get apiSingleProfile() {
-    return `${this.apiAllProfiles}/${profile}`
+    return `${this.apiProfilesPath}/${this.user.name}/posts`;
   }
 
   get apiProfilesQueryParameters() {
@@ -318,7 +314,7 @@ export default class SocialAPI {
   };
   profiles = {
     readAllProfiles: async (limit = 20, page = 1) => {
-      const url = new URL(`${this.apiAllProfiles}${this.apiProfilesQueryParameters}`);
+      const url = new URL(`${this.apiProfilesPath}${this.apiProfilesQueryParameters}`);
 
       url.searchParams.append("limit", limit);
       url.searchParams.append("page", page);
@@ -338,7 +334,7 @@ export default class SocialAPI {
       throw new Error("Could not get profiles", error);
     },
     readSingleProfile: async (profile) => {
-      const url = new URL(`${this.apiSingleProfile}${this.apiProfilesQueryParameters}`)
+      const url = new URL(`${this.apiProfilesPath}/${profile}${this.apiProfilesQueryParameters}`)
 
       const response = await fetch(url, {
         headers: {
@@ -355,7 +351,7 @@ export default class SocialAPI {
       throw new Error("Could not get profile", error)
     },
     follow: async (profile) => {
-      const url = new URL(`${this.apiAllProfiles}/${profile}/follow`);
+      const url = new URL(`${this.apiProfilesPath}/${profile}/follow`);
 
       const response = await fetch(url, {
         headers: {
@@ -373,7 +369,7 @@ export default class SocialAPI {
     },
 
     unfollow: async (profile) => {
-      const url = new URL(`${this.apiAllProfiles}/${profile}/unfollow`);
+      const url = new URL(`${this.apiProfilesPath}/${profile}/unfollow`);
 
       const response = await fetch(url, {
         headers: {
