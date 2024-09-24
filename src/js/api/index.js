@@ -213,11 +213,9 @@ export default class SocialAPI {
       });
 
       if (response.ok) {
-        console.log("Post was deleted");
-        // const text = this.util.handleResponse(response, "text")
-        // return text
+        return
       }
-      throw new Error("Could not delete post with" + id);
+      throw new Error("Could not delete post with id #" + id);
     },
 
     read: async (id) => {
