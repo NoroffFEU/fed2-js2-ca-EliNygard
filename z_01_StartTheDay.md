@@ -1,1 +1,0 @@
-Start with issue [NoroffFEU/fed2-js2-ca-EliNygard#43](https://github.com/NoroffFEU/fed2-js2-ca-EliNygard/issues/43)

@@ -11,7 +11,7 @@ export async function viewProfiles() {
       const li = document.createElement("li");
       
       const a = document.createElement("a")
-      a.href = `/profile?profile=${profile.name}`
+      a.href = `/profiles?profile=${profile.name}`
       a.innerText = profile.name;
       
       const btnFollow = document.createElement("button")
@@ -25,7 +25,11 @@ export async function viewProfiles() {
       const btnPosts = document.createElement("button")
       btnPosts.textContent = "View posts"
 
-      li.append(a, btnFollow, btnUnfollow, btnPosts)
+      const aProfile = document.createElement("a")
+      aProfile.href = `/profiles?profile=${profile.name}`
+      aProfile.textContent = "View Profile"
+
+      li.append(a, btnFollow, btnUnfollow, btnPosts, aProfile)
       
       return li;
     });
