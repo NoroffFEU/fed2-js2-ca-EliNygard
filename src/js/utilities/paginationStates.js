@@ -1,13 +1,13 @@
-export let currentPage = 1;
+export let page = 1;
 
 export function setCurrentPage(page) {
-  currentPage = page;
+  page = page;
 }
 
 export function incrementPage() {
-  currentPage++;
+  page++;
 }
 
 export function decrementPage() {
-  currentPage--;
+  page--;
 }
