@@ -5,7 +5,6 @@ import api from "../../api/instance.js";
 authGuard();
 
 const form = document.forms.editPost;
-console.log(form);
 
 const id = api.id;
 

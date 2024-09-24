@@ -15,5 +15,7 @@ export async function onUpdatePost(event) {
     // window.location.href = `/profile/`;
   } catch (error) {
     console.error(error);
+  } finally {
+    // hide loader
   }
 }
