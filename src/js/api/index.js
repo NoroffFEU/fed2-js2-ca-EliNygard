@@ -338,7 +338,7 @@ export default class SocialAPI {
       });
       if (response.ok) {
         const { data, meta } = await response.json();
-
+        
         return { data, meta };
       }
       throw new Error("Could not get profiles");
