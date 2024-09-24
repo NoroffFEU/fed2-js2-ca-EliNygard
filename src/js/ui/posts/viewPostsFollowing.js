@@ -3,7 +3,6 @@ import api from "../../api/instance.js";
 export async function viewPostsFollowing() {
   try {
     const posts = await api.posts.readFollowing();
-    console.log(posts);
 
     const list = posts.map((post) => {
       const li = document.createElement("li");
