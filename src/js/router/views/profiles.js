@@ -4,7 +4,7 @@ import { viewProfiles } from "../../ui/profiles/viewProfiles.js";
 let page = 1
 const limit = 10
 
-function updateButtonStates() {
+export function updateButtonStates() {
     if (page <= 1) {
         document.getElementById("prevPage").setAttribute("disabled", true)
     } else {
