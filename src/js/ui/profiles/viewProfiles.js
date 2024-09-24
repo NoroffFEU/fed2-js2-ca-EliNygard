@@ -4,7 +4,7 @@ import { onUnfollowProfile } from "./unfollowProfile.js";
 
 export async function viewProfiles() {
   try {
-    const profiles = await api.profiles.readProfiles();
+    const profiles = await api.profiles.readAllProfiles();
 
     const list = profiles.map((profile) => {
             
