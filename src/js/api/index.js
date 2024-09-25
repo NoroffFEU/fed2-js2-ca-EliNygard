@@ -322,8 +322,6 @@ export default class SocialAPI {
   profiles = {
     readAllProfiles: async (limit = 30, page = 1) => {
       const url = new URL(this.apiProfilesPath);
-      console.log(url);
-      
 
       url.searchParams.append("limit", limit);
       url.searchParams.append("page", page);
