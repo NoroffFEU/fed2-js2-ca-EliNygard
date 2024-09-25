@@ -10,6 +10,7 @@ export async function onDeletePost() {
     console.error(error);
     alert(error);
   } finally {
+    localStorage.removeItem("id")
     window.location.href = "/profile/";
   }
 }
