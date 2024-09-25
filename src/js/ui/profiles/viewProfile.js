@@ -1,7 +1,6 @@
 import api from "../../api/instance.js";
 
 export async function viewProfile() {
-  console.log("single profile page");
   try {
     const parameterString = window.location.search;
 
@@ -10,8 +9,6 @@ export async function viewProfile() {
     const profileName = searchParameters.get("name");
 
     const profile = await api.profiles.readSingleProfile(profileName);
-
-    console.log(profile);
 
     const section = document.createElement("section")
 

@@ -4,8 +4,6 @@ export async function onFollowProfile(profile) {
     const follow = profile.name
   try {
     const profile = await api.profiles.follow(follow)
-    console.log(profile);
-    
     alert("You are now following")
     return profile
     
