@@ -163,7 +163,27 @@ export default class SocialAPI {
     },
   };
 
+  /**
+   * The post methods for the SocialAPI
+   * @property {function} create - Creates a new post
+   * @property {function} update - Updates an existing post
+   * @property {function} delete - Deletes an existing post
+   * @property {function} read - Gets a single post by its ID
+   * @property {function} loadPostData - Loads post data into a form
+   */
+
   post = {
+    /**
+     * Creates a new post.
+     *
+     * @async
+     * @function create
+     * @param {Object} postDetails - The details of the post to be created.
+     * @param {string} postDetails.title - The title of the post.
+     * @param {string} postDetails.body - The body content of the post.
+     * @returns {Promise<Object>} The created post data.
+     * @throws {Error} Throws an error if the post creation fails.
+     */
     create: async ({ title, body }) => {
       const response = await fetch(this.apiPostPath, {
         headers: {
@@ -181,6 +201,18 @@ export default class SocialAPI {
       throw new Error(error);
     },
 
+    /**
+     * Updates or edits an existing post
+     *
+     * @async
+     * @function update
+     * @param {string} id - The ID of the post to update.
+     * @param {Object} postDetails - The details of the post to be updated.
+     * @param {string} postDetails.title - The updated title of the post.
+     * @param {string} postDetails.body - The updated body content of the post.
+     * @returns {Promise<Object>} The updated post data.
+     * @throws {Error} Throws an error if the post update fails.
+     */
     update: async (id, { title, body }) => {
       const response = await fetch(`${this.apiPostPath}/${id}`, {
         headers: {
@@ -198,6 +230,15 @@ export default class SocialAPI {
       throw new Error("Could not update post " + id);
     },
 
+    /**
+     * Deletes an existing post
+     *
+     * @async
+     * @function delete
+     * @param {string} id - The ID of the post to be deleted.
+     * @returns {Promise<void>} Returns an empty response on success.
+     * @throws {Error} Throws an error if deleting the post fails.
+     */
     delete: async (id) => {
       const response = await fetch(`${this.apiPostPath}/${id}`, {
         headers: {
@@ -214,6 +255,15 @@ export default class SocialAPI {
       throw new Error("Could not delete post with id #" + id);
     },
 
+    /**
+     * Gets a single post
+     *
+     * @async
+     * @function read
+     * @param {string} id - The ID of the post to be fetched.
+     * @returns {Promise<Object>} The post to be read.
+     * @throws {Error} Throws an error if the post could not be fetched.
+     */
     read: async (id) => {
       const response = await fetch(
         `${this.apiPostPath}/${id}${this.apiPostsQueryParameters}`,
@@ -235,6 +285,17 @@ export default class SocialAPI {
       throw new Error("Could not fetch post");
     },
 
+    /**
+     * Loads the post data from a form.
+     * Used to populate the update post form with the post data.
+     *
+     * @async
+     * @function loadPostData
+     * @param {string} id - The ID of the post to be loaded
+     * @param {HTMLFormElement} form - The form which contain the post data
+     * @returns {Promise<void>} Populates the form fields with the post data
+     *
+     */
     loadPostData: async (id, form) => {
       try {
         const post = await this.post.read(id);
@@ -247,7 +308,22 @@ export default class SocialAPI {
     },
   };
 
+  /**
+   * The post methods for the SocialAPI
+   * @property {function} read - Gets all posts
+   * @property {function} readFollowing - Gets all posts from following profiles
+   */
   posts = {
+    /**
+     * Gets all posts
+     *
+     * @async
+     * @function read
+     * @param {string<number>} limit
+     * @param {string<number>} page
+     * @returns {Promise<Object>} The posts to be read.
+     * @throws {Error} Throws an error if the posts could not be fetched.
+     */
     read: async (limit = 12, page = 1) => {
       const url = new URL(`${this.apiPostPath}${this.apiPostsQueryParameters}`);
 
@@ -269,7 +345,16 @@ export default class SocialAPI {
       }
       throw new Error("Could not fetch posts");
     },
-
+    /**
+     * Gets posts from following profiles
+     *
+     * @async
+     * @function readFollowing
+     * @param {string<number>} limit
+     * @param {string<number>} page
+     * @returns {Promise<Object>} The posts to be read
+     * @throws {Error} Throws an error if the posts could not be fetched.
+     */
     readFollowing: async (limit = 12, page = 1) => {
       const url = new URL(
         `${this.apiPostsFollowing}${this.apiPostsQueryParameters}`
@@ -296,8 +381,23 @@ export default class SocialAPI {
     },
   };
 
+  /**
+   * The profile methods for the SocialAPI.
+   * Handles actions related to the currently logged-in user's profile.
+   *
+   * @property {Object} loggedInProfile - Contains methods related to the logged-in user's profile.
+   * @property {function} readPosts - Fetches posts associated with the logged-in user's profile.
+   */
   profile = {
     loggedInProfile: {
+      /**
+       * Fetches posts from the currently logged-in profile.
+       *
+       * @async
+       * @function readPosts
+       * @returns {Promise<Array<Object>>} An array of post objects related to the logged-in user's profile.
+       * @throws {Error} Throws an error if the posts could not be fetched.
+       */
       readPosts: async () => {
         const url = new URL(
           `${this.apiLoggedInProfilePostsPath}${this.apiProfilesQueryParameters}`
@@ -319,7 +419,27 @@ export default class SocialAPI {
       },
     },
   };
+
+  /**
+   * The profile management methods for the SocialAPI.
+   * Allows for reading all profiles, a single profile, and following or unfollowing profiles.
+   *
+   * @property {function} readAllProfiles - Fetches a paginated list of profiles.
+   * @property {function} readSingleProfile - Fetches a single profile by name.
+   * @property {function} follow - Follows a specified profile.
+   * @property {function} unfollow - Unfollows a specified profile.
+   */
   profiles = {
+    /**
+     * Fetches all profiles with pagination.
+     *
+     * @async
+     * @function readAllProfiles
+     * @param {number} [limit=30] - The number of profiles to return per page (default is 30).
+     * @param {number} [page=1] - The page number to fetch (default is page 1).
+     * @returns {Promise<Object>} An object containing an array of profiles (`data`) and pagination metadata (`meta`).
+     * @throws {Error} Throws an error if the profiles could not be fetched.
+     */
     readAllProfiles: async (limit = 30, page = 1) => {
       const url = new URL(this.apiProfilesPath);
 
@@ -341,6 +461,15 @@ export default class SocialAPI {
       }
       throw new Error("Could not get profiles");
     },
+    /**
+     * Fetches a single profile by its name.
+     *
+     * @async
+     * @function readSingleProfile
+     * @param {string} profile - The name of the profile to be fetched.
+     * @returns {Promise<Object>} The profile data.
+     * @throws {Error} Throws an error if the profile could not be fetched.
+     */
     readSingleProfile: async (profile) => {
       const url = new URL(
         `${this.apiProfilesPath}/${profile}${this.apiProfilesQueryParameters}`
@@ -360,6 +489,15 @@ export default class SocialAPI {
       }
       throw new Error("Could not get profile");
     },
+    /**
+     * Follows a specified profile.
+     *
+     * @async
+     * @function follow
+     * @param {string} profile - The name of the profile to follow.
+     * @returns {Promise<Object>} The updated profile data after following.
+     * @throws {Error} Throws an error if the profile is already followed.
+     */
     follow: async (profile) => {
       const url = new URL(`${this.apiProfilesPath}/${profile}/follow`);
 
@@ -377,7 +515,15 @@ export default class SocialAPI {
       }
       throw new Error("You are already following this profile.");
     },
-
+    /**
+     * Unfollows a specified profile.
+     *
+     * @async
+     * @function unfollow
+     * @param {string} profile - The name of the profile to unfollow.
+     * @returns {Promise<Object>} The updated profile data after unfollowing.
+     * @throws {Error} Throws an error if the profile is not being followed.
+     */
     unfollow: async (profile) => {
       const url = new URL(`${this.apiProfilesPath}/${profile}/unfollow`);
 
