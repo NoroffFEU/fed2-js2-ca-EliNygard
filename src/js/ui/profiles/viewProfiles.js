@@ -8,10 +8,8 @@ export async function viewProfiles(limit, page) {
 
     const profiles = profilesObject.data;
 
-    
     const list = profiles.map((profile) => {
       const li = document.createElement("li");
-console.log(profile.posts);
 
       const a = document.createElement("a");
       a.href = `/profiles/profile/?name=${profile.name}`;
@@ -29,9 +27,9 @@ console.log(profile.posts);
       aProfile.href = `/profiles/profile/?name=${profile.name}`;
       aProfile.textContent = "View Profile";
 
-      const aPosts = document.createElement("a")
-      aPosts.href = `/profiles/posts/?name=${profile.name}`
-      aPosts.textContent = `View Posts by ${profile.name}`
+      const aPosts = document.createElement("a");
+      aPosts.href = `/profiles/posts/?name=${profile.name}`;
+      aPosts.textContent = `View Posts by ${profile.name}`;
 
       li.append(a, btnFollow, btnUnfollow, aProfile, aPosts);
 
@@ -41,7 +39,7 @@ console.log(profile.posts);
     document.getElementById("profilesAll").innerHTML = "";
     document.getElementById("profilesAll").append(...list);
   } catch (error) {
-    console.error("Error fetching profiles: ",error);
-    alert(error)
+    console.error("Error fetching profiles: ", error);
+    alert(error);
   }
 }
