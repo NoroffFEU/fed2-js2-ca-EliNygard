@@ -29,7 +29,6 @@ document.getElementById("nextPage").addEventListener("click", () => {
   window.history.pushState({}, "", url);
   viewProfiles(limit, page);
   updateButtonStates();
-  console.log("Next page url:" + url);
 });
 document.getElementById("prevPage").addEventListener("click", () => {
   if (page > 1) {
