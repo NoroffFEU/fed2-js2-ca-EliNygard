@@ -60,13 +60,30 @@ export default class SocialAPI {
     return `?_following=true&_followers=true&_posts=true`;
   }
 
-  static base = "https://v2.api.noroff.dev"
+  static base = "https://v2.api.noroff.dev";
 
   static paths = {
     register: `${SocialAPI.base}/auth/register`,
     login: `${SocialAPI.base}/auth/login`,
-    post: `${SocialAPI}/social/posts`
-  }
+  };
+
+  util = {
+    setupHeaders: (body, key) => {
+      const headers = new Headers();
+
+      if (localStorage.token) {
+        headers.append("Authorization", `Bearer ${localStorage.token}`);
+      }
+      if (body) {
+        headers.append("Content-Type", "application/json");
+      }
+
+      if (key) {
+        headers.append("X-Noroff-API-Key", API_KEY)
+      }
+      return headers;
+    },
+  };
 
   /**
    * The authentication methods for the SocialAPI.
@@ -100,9 +117,7 @@ export default class SocialAPI {
       });
 
       const response = await fetch(SocialAPI.paths.register, {
-        headers: {
-          "Content-Type": "application/json",
-        },
+        headers: this.util.setupHeaders(true, true),
         method: "post",
         body,
       });
@@ -130,9 +145,7 @@ export default class SocialAPI {
       const body = JSON.stringify({ email, password });
 
       const response = await fetch(SocialAPI.paths.login, {
-        headers: {
-          "Content-Type": "application/json",
-        },
+        headers: this.util.setupHeaders(true, true),
         method: "post",
         body,
       });
@@ -171,7 +184,6 @@ export default class SocialAPI {
    * @property {function} read - Gets a single post by its ID
    * @property {function} loadPostData - Loads post data into a form
    */
-
   post = {
     /**
      * Creates a new post.
