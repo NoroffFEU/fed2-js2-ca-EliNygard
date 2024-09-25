@@ -1,6 +1,6 @@
 import api from "../../api/instance.js";
 
-export async function viewPostsByProfile() {
+export async function viewPostsByLoggedinProfile() {
   try {
     const posts = await api.profile.loggedInProfile.readPosts();
 

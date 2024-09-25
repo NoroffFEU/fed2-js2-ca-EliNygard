@@ -1,6 +1,6 @@
-import { viewPostsByProfile } from "../../ui/posts/viewPostsByProfile";
+import { viewPostsByLoggedinProfile } from "../../ui/posts/viewPostsByLoggedinProfile";
 import { authGuard } from "../../utilities/authGuard";
 
 authGuard();
 
-viewPostsByProfile()
+viewPostsByLoggedinProfile()
