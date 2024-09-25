@@ -34,7 +34,7 @@ export async function viewPostsFollowing() {
     });
     document.getElementById("postsFollowing").append(...list);
   } catch (error) {
-    console.error(error);
+    console.error("Error fetching posts: ",error);
     alert(error);
   } finally {
     //loader

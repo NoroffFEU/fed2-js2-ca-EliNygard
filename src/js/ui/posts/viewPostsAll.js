@@ -25,6 +25,7 @@ export async function viewPostsAll() {
 
     document.getElementById("postsAll").append(...li);
   } catch (error) {
-    console.error(error);
+    console.error("Error fetching posts: ",error);
+    alert(error)
   }
 }

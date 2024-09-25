@@ -9,7 +9,12 @@ const form = document.forms.editPost;
 const id = api.id;
 
 if (id) {
-  api.post.loadPostData(id, form);
+  try {
+    api.post.loadPostData(id, form);
+  } catch (error) {
+    console.error("Error loading post data:", error);
+    alert(error);
+  }
 }
 
 form.addEventListener("submit", onUpdatePost);

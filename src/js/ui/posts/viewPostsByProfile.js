@@ -15,6 +15,7 @@ export async function viewPostsByProfile() {
 
     document.querySelector("#viewPostsProfile").append(...list);
   } catch (error) {
-    console.error(error);
+    console.error("Error fetching posts: ",error);
+    alert(error)
   }
 }

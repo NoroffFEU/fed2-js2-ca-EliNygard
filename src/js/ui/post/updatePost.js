@@ -14,7 +14,8 @@ export async function onUpdatePost(event) {
     window.location.href = `/post/?id=${post.id}`;
     // window.location.href = `/profile/`;
   } catch (error) {
-    console.error(error);
+    console.error("Error updating post: ",error);
+    alert(error)
   } finally {
     // hide loader
   }

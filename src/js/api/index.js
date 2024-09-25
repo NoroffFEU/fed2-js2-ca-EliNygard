@@ -206,7 +206,7 @@ export default class SocialAPI {
         return await response.json();
       }
 
-      throw new Error(error);
+      throw new Error("Could not create post. Please try again.");
     },
 
     /**
@@ -278,7 +278,7 @@ export default class SocialAPI {
         return data;
       }
 
-      throw new Error("Could not fetch post");
+      throw new Error("Could not fetch post.");
     },
 
     /**

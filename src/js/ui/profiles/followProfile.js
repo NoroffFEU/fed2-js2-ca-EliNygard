@@ -8,6 +8,7 @@ export async function onFollowProfile(profile) {
     return profile
     
   } catch (error) {
+    console.error("Error trying to follow profile: ", error);
     alert(error);
   }
 }

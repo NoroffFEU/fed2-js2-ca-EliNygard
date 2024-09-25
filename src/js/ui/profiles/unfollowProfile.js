@@ -9,6 +9,7 @@ export async function onUnfollowProfile(profile) {
         alert(`You are not following ${unfollow} anymore.`)
         return profile
     } catch (error) {
+        console.error("Error trying to unfollow profile: ", error);
         alert(error)
     } finally {
         // loader

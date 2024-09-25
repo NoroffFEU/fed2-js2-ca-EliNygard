@@ -34,6 +34,7 @@ export async function viewProfile() {
     document.querySelector("body").appendChild(section)
 
   } catch (error) {
-    console.error(error);
+    console.error("Error fetching profile: ", error);
+    alert(error)
   }
 }

@@ -10,6 +10,7 @@ export async function onCreatePost(event) {
         const post = (await api.post.create(data)).data;
         window.location.href = `/post/?id=${post.id}`
     } catch(error) {
-        console.error("Could not create post", error);
+        console.error("Error creating post: ", error);
+        alert(error)
     }
 }

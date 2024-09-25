@@ -45,6 +45,7 @@ export async function viewPost() {
 
     localStorage.setItem("id", id)
   } catch (error) {
-    console.error(error);
+    console.error("Error getting post: ",error);
+    alert(error)
   }
 }

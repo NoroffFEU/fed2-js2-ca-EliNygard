@@ -7,7 +7,7 @@ export async function onDeletePost() {
     await api.post.delete(id);
     alert(`Post #${id} has been deleted`);
   } catch (error) {
-    console.error(error);
+    console.error("Error deleting post", error);
     alert(error);
   } finally {
     localStorage.removeItem("id")
