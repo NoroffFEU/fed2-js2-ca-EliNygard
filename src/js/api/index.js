@@ -36,14 +36,6 @@ export default class SocialAPI {
     }
   }
 
-  get apiRegisterPath() {
-    return `${this.apiBase}/auth/register`;
-  }
-
-  get apiLoginPath() {
-    return `${this.apiBase}/auth/login`;
-  }
-
   get apiPostPath() {
     return `${this.apiBase}/social/posts`;
   }
@@ -66,6 +58,14 @@ export default class SocialAPI {
 
   get apiProfilesQueryParameters() {
     return `?_following=true&_followers=true&_posts=true`;
+  }
+
+  static base = "https://v2.api.noroff.dev"
+
+  static paths = {
+    register: `${SocialAPI.base}/auth/register`,
+    login: `${SocialAPI.base}/auth/login`,
+    post: `${SocialAPI}/social/posts`
   }
 
   /**
@@ -99,7 +99,7 @@ export default class SocialAPI {
         avatar,
       });
 
-      const response = await fetch(this.apiRegisterPath, {
+      const response = await fetch(SocialAPI.paths.register, {
         headers: {
           "Content-Type": "application/json",
         },
@@ -129,7 +129,7 @@ export default class SocialAPI {
     login: async ({ email, password }) => {
       const body = JSON.stringify({ email, password });
 
-      const response = await fetch(this.apiLoginPath, {
+      const response = await fetch(SocialAPI.paths.login, {
         headers: {
           "Content-Type": "application/json",
         },
