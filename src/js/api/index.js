@@ -198,11 +198,7 @@ export default class SocialAPI {
      */
     create: async ({ title, body }) => {
       const response = await fetch(this.apiPostPath, {
-        headers: {
-          "Content-type": "application/json",
-          Authorization: `Bearer ${localStorage.token}`,
-          "X-Noroff-API-Key": API_KEY,
-        },
+        headers: this.util.setupHeaders(true, true),
         method: "post",
         body: JSON.stringify({ title, body }),
       });
@@ -227,11 +223,7 @@ export default class SocialAPI {
      */
     update: async (id, { title, body }) => {
       const response = await fetch(`${this.apiPostPath}/${id}`, {
-        headers: {
-          "Content-type": "application/json",
-          Authorization: `Bearer ${localStorage.token}`,
-          "X-Noroff-API-Key": API_KEY,
-        },
+        headers: this.util.setupHeaders(true, true),
         method: "put",
         body: JSON.stringify({ title, body }),
       });
@@ -253,11 +245,7 @@ export default class SocialAPI {
      */
     delete: async (id) => {
       const response = await fetch(`${this.apiPostPath}/${id}`, {
-        headers: {
-          "Content-type": "application/json",
-          Authorization: `Bearer ${localStorage.token}`,
-          "X-Noroff-API-Key": API_KEY,
-        },
+        headers: this.util.setupHeaders(true, true),
         method: "delete",
       });
 
@@ -280,11 +268,7 @@ export default class SocialAPI {
       const response = await fetch(
         `${this.apiPostPath}/${id}${this.apiPostsQueryParameters}`,
         {
-          headers: {
-            "Content-type": "application/json",
-            Authorization: `Bearer ${localStorage.token}`,
-            "X-Noroff-API-Key": API_KEY,
-          },
+          headers: this.util.setupHeaders(true, true),
           method: "get",
         }
       );
