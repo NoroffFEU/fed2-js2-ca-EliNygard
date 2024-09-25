@@ -8,8 +8,10 @@ export async function viewProfiles(limit, page) {
 
     const profiles = profilesObject.data;
 
+    
     const list = profiles.map((profile) => {
       const li = document.createElement("li");
+console.log(profile.posts);
 
       const a = document.createElement("a");
       a.href = `/profiles/profile/?name=${profile.name}`;
@@ -27,7 +29,11 @@ export async function viewProfiles(limit, page) {
       aProfile.href = `/profiles/profile/?name=${profile.name}`;
       aProfile.textContent = "View Profile";
 
-      li.append(a, btnFollow, btnUnfollow, aProfile);
+      const aPosts = document.createElement("a")
+      aPosts.href = `/profiles/posts/?name=${profile.name}`
+      aPosts.textContent = `View Posts by ${profile.name}`
+
+      li.append(a, btnFollow, btnUnfollow, aProfile, aPosts);
 
       return li;
     });

@@ -517,5 +517,20 @@ export default class SocialAPI {
       }
       throw new Error("You are not following this profile.");
     },
+    readPostsByProfile: async(profile) => {
+      const url = new URL(`${this.apiProfilesPath}/${profile}/posts${this.apiProfilesQueryParameters}`)
+      console.log(url);
+      
+      const response = await fetch(url, {
+        headers: this.util.setupHeaders(true, true),
+        method: "get",
+      })
+      if (response.ok) {
+        const { data, meta } = await response.json()
+
+        return { data, meta}
+      }
+      throw new Error("Could not fetch posts from profile.")
+    }
   };
 }
