@@ -23,14 +23,11 @@ export async function viewProfiles(limit, page) {
       btnUnfollow.textContent = "Unfollow";
       btnUnfollow.addEventListener("click", () => onUnfollowProfile(profile));
 
-      const btnPosts = document.createElement("button");
-      btnPosts.textContent = "View posts";
-
       const aProfile = document.createElement("a");
       aProfile.href = `/profiles/profile/?name=${profile.name}`;
       aProfile.textContent = "View Profile";
 
-      li.append(a, btnFollow, btnUnfollow, btnPosts, aProfile);
+      li.append(a, btnFollow, btnUnfollow, aProfile);
 
       return li;
     });
@@ -38,6 +35,7 @@ export async function viewProfiles(limit, page) {
     document.getElementById("profilesAll").innerHTML = "";
     document.getElementById("profilesAll").append(...list);
   } catch (error) {
-    console.error(error);
+    console.error("Error fetching profiles: ",error);
+    alert(error)
   }
 }
