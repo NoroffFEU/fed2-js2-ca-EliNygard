@@ -320,10 +320,10 @@ export default class SocialAPI {
     },
   };
   profiles = {
-    readAllProfiles: async (limit = 10, page = 1) => {
-      const url = new URL(
-        `${this.apiProfilesPath}${this.apiProfilesQueryParameters}`
-      );
+    readAllProfiles: async (limit = 30, page = 1) => {
+      const url = new URL(this.apiProfilesPath);
+      console.log(url);
+      
 
       url.searchParams.append("limit", limit);
       url.searchParams.append("page", page);
@@ -338,7 +338,7 @@ export default class SocialAPI {
       });
       if (response.ok) {
         const { data, meta } = await response.json();
-        
+
         return { data, meta };
       }
       throw new Error("Could not get profiles");
