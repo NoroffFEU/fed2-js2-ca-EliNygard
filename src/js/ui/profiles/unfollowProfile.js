@@ -6,7 +6,7 @@ export async function onUnfollowProfile(profile) {
     try {
         const profile = await api.profiles.unfollow(unfollow)
 
-        alert("You are not following this profile anymore")
+        alert(`You are not following ${unfollow} anymore.`)
         return profile
     } catch (error) {
         alert(error)
