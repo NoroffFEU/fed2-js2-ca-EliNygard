@@ -400,11 +400,7 @@ export default class SocialAPI {
         );
 
         const response = await fetch(url, {
-          headers: {
-            "Content-type": "application/json",
-            Authorization: `Bearer ${localStorage.token}`,
-            "X-Noroff-API-Key": API_KEY,
-          },
+          headers: this.util.setupHeaders(true, true),
           method: "get",
         });
         if (response.ok) {
@@ -443,11 +439,7 @@ export default class SocialAPI {
       url.searchParams.append("page", page);
 
       const response = await fetch(url, {
-        headers: {
-          "Content-type": "application/json",
-          Authorization: `Bearer ${localStorage.token}`,
-          "X-Noroff-API-Key": API_KEY,
-        },
+        headers: this.util.setupHeaders(true, true),
         method: "get",
       });
       if (response.ok) {
@@ -472,11 +464,7 @@ export default class SocialAPI {
       );
 
       const response = await fetch(url, {
-        headers: {
-          "Content-type": "application/json",
-          Authorization: `Bearer ${localStorage.token}`,
-          "X-Noroff-API-Key": API_KEY,
-        },
+        headers: this.util.setupHeaders(true, true),
         method: "get",
       });
       if (response.ok) {
@@ -498,11 +486,7 @@ export default class SocialAPI {
       const url = new URL(`${this.apiProfilesPath}/${profile}/follow`);
 
       const response = await fetch(url, {
-        headers: {
-          "Content-type": "application/json",
-          Authorization: `Bearer ${localStorage.token}`,
-          "X-Noroff-API-Key": API_KEY,
-        },
+        headers: this.util.setupHeaders(true, true),
         method: "put",
       });
       if (response.ok) {
@@ -524,11 +508,7 @@ export default class SocialAPI {
       const url = new URL(`${this.apiProfilesPath}/${profile}/unfollow`);
 
       const response = await fetch(url, {
-        headers: {
-          "Content-type": "application/json",
-          Authorization: `Bearer ${localStorage.token}`,
-          "X-Noroff-API-Key": API_KEY,
-        },
+        headers: this.util.setupHeaders(true, true),
         method: "put",
       });
       if (response.ok) {
