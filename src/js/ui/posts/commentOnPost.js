@@ -1,6 +1,6 @@
 import api from "../../api/instance.js";
 
-export async function onComment(event) {
+export async function onComment(event, postId) {
     event.preventDefault()
     const form = event.target
     const formData = new FormData(form)
@@ -8,8 +8,7 @@ export async function onComment(event) {
     
     try {
         // show loader
-        const id  = api.id;
-        const comment = await api.posts.commentOnPost(id, data)
+        const comment = await api.posts.commentOnPost(postId, data)
         console.log(comment);
         
         alert("Comment added.")

@@ -52,8 +52,8 @@ export async function viewPostsFollowing() {
 
       form.addEventListener("submit", (event) => {
         const id = post.id;
-        localStorage.setItem("id", id);
-        onComment(event);
+        // localStorage.setItem("id", id);
+        onComment(event, id);
       });
 
       const commentsArray = post.comments;
