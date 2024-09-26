@@ -378,18 +378,18 @@ export default class SocialAPI {
       }
       throw new Error("Could not fetch posts from the following profiles");
     },
-    commentOnPost: async (id, { body, replyToId }) => {
-      const url = new URL(`${this.apiPostPath}/${id}/comment`)
+    commentOnPost: async (id, { body, replyToId = null }) => {
+      const url = new URL(`${this.apiPostPath}/${id}/comment`);
       const response = await fetch(url, {
         headers: this.util.setupHeaders(true, true),
         method: "post",
-        body: JSON.stringify({ body, replyToId })
-      })
+        body: JSON.stringify({ body, replyToId }),
+      });
       if (response.ok) {
-        return await response.json()
+        return await response.json();
       }
-      throw new Error("Could not add comment. Please try again.")
-    }
+      throw new Error("Could not add comment. Please try again.");
+    },
   };
 
   /**
