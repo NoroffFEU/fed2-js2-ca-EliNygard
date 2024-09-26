@@ -10,16 +10,16 @@ export async function onComment(event) {
         // show loader
         const id  = api.id;
         const comment = await api.posts.commentOnPost(id, data)
-        alert("Comment added: ", comment)
-        if (!comment.success) {
-            throw new Error("Failed to add comment: " + comment.body)
-        }
+        console.log(comment);
+        
+        alert("Comment added.")
+        
         // optionally append the comment to the post dynamically here
         // document.querySelector('#comments-section').innerHTML += `<p>${comment.content}</p>`; 
         // OR:
         // await api.posts.commentOnPost(id, data); // Just await without assigning it to a variable
     } catch (error) {
-        console.error("Error trying to add comment; ", error);
+        console.error("Error trying to add comment: ", error);
         alert(error)
     } finally {
         form.reset()
