@@ -28,6 +28,18 @@ export default class SocialAPI {
     }
   }
 
+  set user(userData) {
+    localStorage.setItem("user", JSON.stringify(userData))
+  }
+
+  get token() {
+    return localStorage.token
+  }
+
+  set token(accessToken) {
+    localStorage.setItem("token", accessToken)
+  }
+
   get id() {
     try {
       return JSON.parse(localStorage.id);
@@ -164,8 +176,10 @@ export default class SocialAPI {
       if (response.ok) {
         const { data } = await response.json();
         const { accessToken: token, ...user } = data;
-        localStorage.token = token;
-        localStorage.user = JSON.stringify(user);
+        
+        this.user = user;
+        this.token = token;
+
         return data;
       }
 
@@ -177,8 +191,8 @@ export default class SocialAPI {
      */
     logout: () => {
       try {
-        localStorage.removeItem("token");
-        localStorage.removeItem("user");
+        this.user = null;
+        this.token = null
         window.location.href = "/auth/login/";
       } catch (error) {
         console.error(error);
