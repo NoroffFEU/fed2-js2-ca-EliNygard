@@ -7,10 +7,14 @@ export async function onCreatePost(event) {
     const data = Object.fromEntries(formData.entries())
 
     try {
+        // show loader
         const post = (await api.post.create(data)).data;
         window.location.href = `/post/?id=${post.id}`
     } catch(error) {
         console.error("Error creating post: ", error);
         alert(error)
+    } finally {
+        form.reset()
+        // hide loader
     }
 }
