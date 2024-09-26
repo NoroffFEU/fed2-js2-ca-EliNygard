@@ -40,6 +40,10 @@ export default class SocialAPI {
     localStorage.setItem("token", accessToken)
   }
 
+  get key() {
+    return "2738afc4-c4e5-4848-942b-c94bf9b4be1f"
+  }
+
   get id() {
     try {
       return JSON.parse(localStorage.id);
@@ -102,7 +106,7 @@ export default class SocialAPI {
       }
 
       if (key) {
-        headers.append("X-Noroff-API-Key", API_KEY);
+        headers.append("X-Noroff-API-Key", this.key);
       }
       return headers;
     },
