@@ -20,7 +20,7 @@ export async function onUpdatePost(event) {
   const formData = new FormData(form);
   const data = Object.fromEntries(formData.entries());
 
-  const id = api.id;
+  const id = api.idUrl;
 
   try {
     const post = (await api.post.update(id, data)).data;

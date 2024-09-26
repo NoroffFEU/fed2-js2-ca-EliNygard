@@ -5,8 +5,12 @@ import api from "../../api/instance.js";
 authGuard();
 
 const form = document.forms.editPost;
+console.log(form);
 
-const id = api.id;
+
+const id = api.idUrl;
+console.log(id);
+
 
 if (id) {
   try {
