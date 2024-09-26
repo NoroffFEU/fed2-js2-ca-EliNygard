@@ -1,7 +1,7 @@
 import api from "../../api/instance.js";
 
 export async function onDeletePost() {
-  const id = api.id;
+  const id = api.idUrl;
 
   try {
     await api.post.delete(id);
@@ -10,7 +10,6 @@ export async function onDeletePost() {
     console.error("Error deleting post", error);
     alert(error);
   } finally {
-    localStorage.removeItem("id")
     window.location.href = "/profile/";
   }
 }

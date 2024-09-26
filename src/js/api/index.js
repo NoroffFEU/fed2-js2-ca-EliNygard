@@ -36,6 +36,17 @@ export default class SocialAPI {
     }
   }
 
+  get idUrl() {
+    try {
+      const parameterString = window.location.search;
+      const searchParameters = new URLSearchParams(parameterString);
+      const id = searchParameters.get("id");
+      return id;
+    } catch {
+      return null;
+    }
+  }
+
   get apiPostPath() {
     return `${this.apiBase}/social/posts`;
   }
@@ -79,7 +90,7 @@ export default class SocialAPI {
       }
 
       if (key) {
-        headers.append("X-Noroff-API-Key", API_KEY)
+        headers.append("X-Noroff-API-Key", API_KEY);
       }
       return headers;
     },
@@ -517,20 +528,22 @@ export default class SocialAPI {
       }
       throw new Error("You are not following this profile.");
     },
-    readPostsByProfile: async(profile) => {
-      const url = new URL(`${this.apiProfilesPath}/${profile}/posts${this.apiProfilesQueryParameters}`)
+    readPostsByProfile: async (profile) => {
+      const url = new URL(
+        `${this.apiProfilesPath}/${profile}/posts${this.apiProfilesQueryParameters}`
+      );
       console.log(url);
-      
+
       const response = await fetch(url, {
         headers: this.util.setupHeaders(true, true),
         method: "get",
-      })
+      });
       if (response.ok) {
-        const { data, meta } = await response.json()
+        const { data, meta } = await response.json();
 
-        return { data, meta}
+        return { data, meta };
       }
-      throw new Error("Could not fetch posts from profile.")
-    }
+      throw new Error("Could not fetch posts from profile.");
+    },
   };
 }

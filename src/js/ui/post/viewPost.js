@@ -15,11 +15,9 @@ import { onDeletePost } from "./deletePost.js";
  */
 export async function viewPost() {
   try {
-    const parameterString = window.location.search;
-    
-    const searchParameters = new URLSearchParams(parameterString);
-    
-    const id = searchParameters.get("id");
+    const id = api.idUrl;
+
+    if (!id) throw new Error("Could not find a post ID. Unable to display the post.")
 
     const post = await api.post.read(id);
 
@@ -43,7 +41,6 @@ export async function viewPost() {
 
     document.querySelector("body").appendChild(section);
 
-    localStorage.setItem("id", id)
   } catch (error) {
     console.error("Error getting post: ",error);
     alert(error)
