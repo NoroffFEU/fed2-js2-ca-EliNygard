@@ -1,9 +1,11 @@
 import api from "../../api/instance.js";
 import { onComment } from "./commentOnPost.js";
+import { onDeleteComment } from "./deleteComment.js";
 
 export async function viewPostsFollowing() {
   try {
     const posts = await api.posts.readFollowing();
+    const loggedinProfile = api.user.name
 
     const list = posts.map((post) => {
       const li = document.createElement("li");
@@ -56,6 +58,8 @@ export async function viewPostsFollowing() {
 
       const commentsArray = post.comments;
       const commentsList = commentsArray.map((comment) => {
+        const postId = comment.postId
+        const commentId = comment.id
         
         const li = document.createElement("li");
 
@@ -66,7 +70,19 @@ export async function viewPostsFollowing() {
         const body = document.createElement("p");
         body.textContent = comment.body;
 
-        li.append(aAuthor, body);
+        const btnContainer = document.createElement("div")
+
+        const btnDelete = document.createElement("button")
+        btnDelete.textContent = "Delete comment"
+        btnDelete.addEventListener("click", () => onDeleteComment(postId, commentId))
+
+        const author = comment.author.name
+        
+        if (author === loggedinProfile) {
+          btnContainer.appendChild(btnDelete)
+        }
+
+        li.append(aAuthor, body, btnContainer);
         return li;
       });
 

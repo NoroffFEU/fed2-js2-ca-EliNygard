@@ -273,7 +273,6 @@ export default class SocialAPI {
         headers: this.util.setupHeaders(true, true),
         method: "delete",
       });
-
       if (response.ok) {
         return;
       }
@@ -404,6 +403,17 @@ export default class SocialAPI {
       }
       throw new Error("Could not add comment. Please try again.");
     },
+    deleteComment: async (id, commentId) => {
+      const response = await fetch(`${this.apiPostPath}/${id}/comment/${commentId}`, {
+        headers: this.util.setupHeaders(true, true),
+        method: "delete"
+      })
+      if (response.ok) {
+        return
+      }
+      throw new Error(`Could not delete comment with id #${commentId}. Please try again.`)
+
+    }
   };
 
   /**
