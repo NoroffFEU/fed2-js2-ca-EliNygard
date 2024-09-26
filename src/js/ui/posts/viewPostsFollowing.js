@@ -24,13 +24,34 @@ export async function viewPostsFollowing() {
         img.alt = post.media.alt;
       };
 
-      const btnComment = document.createElement("button");
-      btnComment.textContent = "Comment";
-
       const xComments = document.createElement("p");
       xComments.textContent = `Comments: ${post._count.comments}`;
 
-      li.append(img, xComments, btnComment, h3, aAuthor);
+      const sectionComment = document.createElement("section")
+
+      const form = document.createElement("form")
+      form.setAttribute("name", "commentOnPost")
+      
+      const label = document.createElement("label")
+      label.setAttribute("for", "body")
+      label.textContent = "Write your comment" 
+
+      const textarea = document.createElement("textarea")
+      textarea.setAttribute("name", "body")
+      textarea.setAttribute("id", "body")
+
+      const button = document.createElement("button")
+      button.textContent = "Comment"
+
+      form.append(label, textarea, button)
+      sectionComment.appendChild(form)
+
+      li.append(
+        img, 
+        h3, 
+        aAuthor, 
+        xComments, 
+        sectionComment);
       return li;
     });
     document.getElementById("postsFollowing").append(...list);
