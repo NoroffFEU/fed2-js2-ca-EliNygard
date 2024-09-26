@@ -1,10 +1,9 @@
-import { viewPostsByLoggedinProfile } from "../../ui/posts/viewPostsByLoggedinProfile";
+import { viewCurrentUser } from "../../ui/profiles/viewCurrentUser";
 import { authGuard } from "../../utilities/authGuard";
-import api from "../../api/instance.js";
 
 authGuard();
 
-viewPostsByLoggedinProfile()
+viewCurrentUser()
 
 
 
