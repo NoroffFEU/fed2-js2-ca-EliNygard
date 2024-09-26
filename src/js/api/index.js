@@ -532,7 +532,6 @@ export default class SocialAPI {
       const url = new URL(
         `${this.apiProfilesPath}/${profile}/posts${this.apiProfilesQueryParameters}`
       );
-      console.log(url);
 
       const response = await fetch(url, {
         headers: this.util.setupHeaders(true, true),

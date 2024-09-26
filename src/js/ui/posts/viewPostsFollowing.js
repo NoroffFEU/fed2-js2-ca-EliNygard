@@ -10,8 +10,9 @@ export async function viewPostsFollowing() {
       const h3 = document.createElement("h3");
       h3.textContent = post.title;
 
-      const author = document.createElement("p");
-      author.textContent = `Author: ${post.author.name}`;
+      const aAuthor = document.createElement("a");
+      aAuthor.textContent = `Author: ${post.author.name}`;
+      aAuthor.href = `../profiles/posts/?name=${post.author.name}`
 
       const img = document.createElement("img");
       img.src =
@@ -29,7 +30,7 @@ export async function viewPostsFollowing() {
       const xComments = document.createElement("p");
       xComments.textContent = `Comments: ${post._count.comments}`;
 
-      li.append(img, xComments, btnComment, h3, author);
+      li.append(img, xComments, btnComment, h3, aAuthor);
       return li;
     });
     document.getElementById("postsFollowing").append(...list);

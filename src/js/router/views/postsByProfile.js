@@ -1,3 +1,3 @@
-import { viewPostsByProfile } from "../../ui/profiles/postsByProfile";
+import { viewPostsByProfile } from "../../ui/profiles/viewPostsByProfile";
 
 viewPostsByProfile()
