@@ -13,7 +13,7 @@ export async function viewPostsFollowing() {
 
       const aAuthor = document.createElement("a");
       aAuthor.textContent = `Author: ${post.author.name}`;
-      aAuthor.href = `../profiles/posts/?name=${post.author.name}`
+      aAuthor.href = `../profiles/posts/?name=${post.author.name}`;
 
       const img = document.createElement("img");
       img.src =
@@ -28,43 +28,55 @@ export async function viewPostsFollowing() {
       const xComments = document.createElement("p");
       xComments.textContent = `Comments: ${post._count.comments}`;
 
-      const sectionComment = document.createElement("section")
+      const sectionComment = document.createElement("section");
 
-      const form = document.createElement("form")
-      form.setAttribute("name", "commentOnPost")
-      
-      const label = document.createElement("label")
-      label.setAttribute("for", "body")
-      label.textContent = "Write your comment" 
+      const form = document.createElement("form");
+      form.setAttribute("name", "commentOnPost");
 
-      const textarea = document.createElement("textarea")
-      textarea.setAttribute("name", "body")
-      textarea.setAttribute("id", "body")
+      const label = document.createElement("label");
+      label.setAttribute("for", "body");
+      label.textContent = "Write your comment";
 
-      const button = document.createElement("button")
-      button.textContent = "Comment"
-      button.setAttribute("type", "submit")
+      const textarea = document.createElement("textarea");
+      textarea.setAttribute("name", "body");
+      textarea.setAttribute("id", "body");
 
-      form.append(label, textarea, button)
-      sectionComment.appendChild(form)
+      const button = document.createElement("button");
+      button.textContent = "Comment";
+      button.setAttribute("type", "submit");
+
+      form.append(label, textarea, button);
+      sectionComment.appendChild(form);
 
       form.addEventListener("submit", (event) => {
-        const id = post.id
-        localStorage.setItem("id", id)
-        onComment(event)
-      } )
+        const id = post.id;
+        localStorage.setItem("id", id);
+        onComment(event);
+      });
 
-      li.append(
-        img, 
-        h3, 
-        aAuthor, 
-        xComments, 
-        sectionComment);
+      const commentsArray = post.comments;
+      const commentsList = commentsArray.map((comment) => {
+        console.log(comment);
+        
+        const li = document.createElement("li");
+
+        const aAuthor = document.createElement("a")
+        aAuthor.textContent = `Comment by: ${comment.author.name}`
+        aAuthor.href = `/profiles/profile/?name=${comment.author.name}`
+
+        const body = document.createElement("p");
+        body.textContent = comment.body;
+
+        li.append(aAuthor, body);
+        return li;
+      });
+
+      li.append(img, h3, aAuthor, xComments, sectionComment, ...commentsList);
       return li;
     });
     document.getElementById("postsFollowing").append(...list);
   } catch (error) {
-    console.error("Error fetching posts: ",error);
+    console.error("Error fetching posts: ", error);
     alert(error);
   } finally {
     //loader
