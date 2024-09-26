@@ -1,5 +1,20 @@
 import api from "../../api/instance.js";
 
+/**
+ * Fetches and displays a single profile with their posts.
+ *
+ * This function retrieves the profile name from the URL's query parameters, fetches the profile
+ * data from the API, and dynamically creates and displays profile information, including their banner,
+ * avatar, name, bio, and post count. If the profile has posts, it displays them in the HTML element with the ID "postsList".
+ * If the profile has no posts, an alert is triggered. The profile card is displayed in the HTML element with the ID "profileCard".
+ *
+ * @async
+ * @function viewProfile
+ * @returns {Promise<void>} Resolves when the profile data is fetched and displayed, or an error is caught.
+ *
+ * @throws {Error} Will throw an error if there is an issue fetching the profile from the API.
+ */
+
 export async function viewProfile() {
   try {
     const parameterString = window.location.search;

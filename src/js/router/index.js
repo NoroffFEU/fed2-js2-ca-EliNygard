@@ -1,6 +1,16 @@
-// This function controls which JavaScript file is loaded on which page
-// In order to add additional pages, you will need to implement them below
-// You may change the behaviour or approach of this file if you choose
+/**
+ * A client-side router that dynamically imports and loads views based on the current URL path.
+ *
+ * This function checks the `pathname` and conditionally imports the corresponding view module for each route.
+ * It supports paths for the home page, explore page, authentication pages (login, register), post-related pages,
+ * profile pages, and a default case for a 404 not found page.
+ *
+ * @async
+ * @function router
+ * @param {string} [pathname=window.location.pathname] - The current URL path. Defaults to the current window location's pathname.
+ * @returns {Promise<void>} Resolves when the appropriate view is imported and loaded.
+ */
+
 export default async function router(pathname = window.location.pathname) {
   switch (pathname) {
     case "/":

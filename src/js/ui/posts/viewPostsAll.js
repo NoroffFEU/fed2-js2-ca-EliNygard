@@ -1,6 +1,21 @@
 import api from "../../api/instance.js";
 import { onFollowProfile } from "../profiles/followProfile.js";
 
+/**
+ * Fetches and displays all posts.
+ *
+ * This function retrieves all posts from the API and dynamically creates a list for each post,
+ * including the title, author, media (if available), and a follow button for the post author.
+ * Each post is appended to the HTML element with the ID "postsAll". If an error occurs during
+ * the fetching process, it is logged and an alert is shown.
+ *
+ * @async
+ * @function viewPostsAll
+ * @returns {Promise<void>} Resolves when the posts are fetched and displayed, or an error is caught.
+ *
+ * @throws {Error} Will throw an error if there is an issue fetching the posts from the API.
+ */
+
 export async function viewPostsAll() {
   try {
     const posts = await api.posts.read();

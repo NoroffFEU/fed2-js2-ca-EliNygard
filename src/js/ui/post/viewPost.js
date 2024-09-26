@@ -17,7 +17,8 @@ export async function viewPost() {
   try {
     const id = api.idUrl;
 
-    if (!id) throw new Error("Could not find a post ID. Unable to display the post.")
+    if (!id)
+      throw new Error("Could not find a post ID. Unable to display the post.");
 
     const post = await api.post.read(id);
 
@@ -30,19 +31,18 @@ export async function viewPost() {
     p.textContent = post.body;
 
     const btnEdit = document.createElement("a");
-    btnEdit.href = "/post/edit/"
+    btnEdit.href = "/post/edit/";
     btnEdit.textContent = "Edit";
 
     const btnDelete = document.createElement("button");
     btnDelete.textContent = "Delete";
-    btnDelete.addEventListener("click", () => onDeletePost())
+    btnDelete.addEventListener("click", () => onDeletePost());
 
     section.append(h2, p, btnEdit, btnDelete);
 
     document.querySelector("body").appendChild(section);
-
   } catch (error) {
-    console.error("Error getting post: ",error);
-    alert(error)
+    console.error("Error getting post: ", error);
+    alert(error);
   }
 }
