@@ -36,7 +36,8 @@ export async function viewPostsByProfile() {
       });
       document.querySelector("body").append(...list);
     } else {
-      console.log("no posts");
+      // rather than alert, display message on page
+      alert("This profile has no posts");
     }
   } catch (error) {
     console.error("Error fetching posts: ", error);

@@ -56,7 +56,6 @@ export async function viewPostsFollowing() {
 
       const commentsArray = post.comments;
       const commentsList = commentsArray.map((comment) => {
-        console.log(comment);
         
         const li = document.createElement("li");
 
