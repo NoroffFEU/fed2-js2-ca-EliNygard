@@ -529,6 +529,8 @@ export default class SocialAPI {
       throw new Error("You are not following this profile.");
     },
     readPostsByProfile: async (profile) => {
+      // add tag as parameter? Limit? Page?
+
       const url = new URL(
         `${this.apiProfilesPath}/${profile}/posts${this.apiProfilesQueryParameters}`
       );
