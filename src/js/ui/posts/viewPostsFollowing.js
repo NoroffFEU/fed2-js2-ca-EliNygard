@@ -1,4 +1,5 @@
 import api from "../../api/instance.js";
+import { onComment } from "./commentOnPost.js";
 
 export async function viewPostsFollowing() {
   try {
@@ -42,9 +43,16 @@ export async function viewPostsFollowing() {
 
       const button = document.createElement("button")
       button.textContent = "Comment"
+      button.setAttribute("type", "submit")
 
       form.append(label, textarea, button)
       sectionComment.appendChild(form)
+
+      form.addEventListener("submit", (event) => {
+        const id = post.id
+        localStorage.setItem("id", id)
+        onComment(event)
+      } )
 
       li.append(
         img, 
