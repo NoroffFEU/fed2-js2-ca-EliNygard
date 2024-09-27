@@ -1,3 +1,5 @@
+import { API_KEY } from "./constants";
+
 /**
  * A class representing the SocialAPI service for authentication.
  * This class provides methods to interact with the authentication API for registering, logging in and logging out users.
@@ -36,10 +38,6 @@ export default class SocialAPI {
 
   set token(accessToken) {
     localStorage.setItem("token", accessToken)
-  }
-
-  get key() {
-    return "2738afc4-c4e5-4848-942b-c94bf9b4be1f"
   }
 
   get id() {
@@ -104,7 +102,7 @@ export default class SocialAPI {
       }
 
       if (key) {
-        headers.append("X-Noroff-API-Key", "2738afc4-c4e5-4848-942b-c94bf9b4be1f");
+        headers.append("X-Noroff-API-Key", API_KEY);
       }
       return headers;
     },
