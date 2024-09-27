@@ -18,12 +18,13 @@ import api from "../../api/instance.js";
 
 export async function onUnfollowProfile(profile) {
   const unfollow = profile.name;
-
   try {
-    const profile = await api.profiles.unfollow(unfollow);
-
+    await api.profiles.unfollow(unfollow);
     alert(`You are not following ${unfollow} anymore.`);
-    return profile;
+
+    if (window.location.pathname === "/" || window.location.pathname.includes("/index.html")) {
+      window.location.reload()
+    }
   } catch (error) {
     console.error("Error trying to unfollow profile: ", error);
     alert(error);

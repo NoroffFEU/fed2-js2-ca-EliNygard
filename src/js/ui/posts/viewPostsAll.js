@@ -53,7 +53,7 @@ export async function viewPostsAll() {
       const btnFollow = document.createElement("button");
       btnFollow.textContent = "Follow";
       btnFollow.addEventListener("click", () => onFollowProfile(post.author));
-
+      
       const btnUnfollow = document.createElement("button");
       btnUnfollow.textContent = "Unfollow";
       btnUnfollow.addEventListener("click", () =>

@@ -1,4 +1,5 @@
 import api from "../../api/instance.js";
+import { onUnfollowProfile } from "../profiles/unfollowProfile.js";
 import { onComment } from "./addComment.js";
 import { onDeleteComment } from "./deleteComment.js";
 
@@ -39,6 +40,10 @@ export async function viewPostsFollowing() {
       aAuthor.textContent = `Author: ${post.author.name}`;
       aAuthor.href = `../profiles/profile/?name=${post.author.name}`;
 
+      const btnUnFollow = document.createElement("button")
+      btnUnFollow.textContent = "Unfollow"
+      btnUnFollow.addEventListener("click", () => onUnfollowProfile(post.author))
+
       const img = document.createElement("img");
       img.classList.add("post-img")
       img.src =
@@ -76,7 +81,6 @@ export async function viewPostsFollowing() {
 
       form.addEventListener("submit", (event) => {
         const id = post.id;
-        // localStorage.setItem("id", id);
         onComment(event, id);
       });
 
@@ -112,7 +116,7 @@ export async function viewPostsFollowing() {
         return li;
       });
 
-      li.append(img, h3, body, avatar, aAuthor, xComments, sectionComment, ...commentsList);
+      li.append(img, h3, body, avatar, aAuthor, btnUnFollow, xComments, sectionComment, ...commentsList);
       return li;
     });
     document.getElementById("postsFollowing").append(...list);
