@@ -93,11 +93,11 @@ export default class SocialAPI {
   };
 
   util = {
-    setupHeaders: (body, key) => {
+    setupHeaders: (body, key, accessToken) => {
       const headers = new Headers();
 
-      if (localStorage.token) {
-        headers.append("Authorization", `Bearer ${localStorage.token}`);
+      if (accessToken) {
+        headers.append("Authorization", `Bearer ${this.token}`);
       }
       if (body) {
         headers.append("Content-Type", "application/json");
@@ -225,7 +225,7 @@ export default class SocialAPI {
      */
     create: async ({ title, body }) => {
       const response = await fetch(this.apiPostPath, {
-        headers: this.util.setupHeaders(true, true),
+        headers: this.util.setupHeaders(true, true, true),
         method: "post",
         body: JSON.stringify({ title, body }),
       });
@@ -250,7 +250,7 @@ export default class SocialAPI {
      */
     update: async (id, { title, body }) => {
       const response = await fetch(`${this.apiPostPath}/${id}`, {
-        headers: this.util.setupHeaders(true, true),
+        headers: this.util.setupHeaders(true, true, true),
         method: "put",
         body: JSON.stringify({ title, body }),
       });
@@ -272,7 +272,7 @@ export default class SocialAPI {
      */
     delete: async (id) => {
       const response = await fetch(`${this.apiPostPath}/${id}`, {
-        headers: this.util.setupHeaders(true, true),
+        headers: this.util.setupHeaders(true, true, true),
         method: "delete",
       });
       if (response.ok) {
@@ -294,7 +294,7 @@ export default class SocialAPI {
       const response = await fetch(
         `${this.apiPostPath}/${id}${this.apiPostsQueryParameters}`,
         {
-          headers: this.util.setupHeaders(true, true),
+          headers: this.util.setupHeaders(true, true, true),
           method: "get",
         }
       );
@@ -353,7 +353,7 @@ export default class SocialAPI {
       url.searchParams.append("page", page);
 
       const response = await fetch(url, {
-        headers: this.util.setupHeaders(true, true),
+        headers: this.util.setupHeaders(true, true, true),
         method: "get",
       });
 
@@ -382,7 +382,7 @@ export default class SocialAPI {
       url.searchParams.append("page", page);
 
       const response = await fetch(url, {
-        headers: this.util.setupHeaders(true, true),
+        headers: this.util.setupHeaders(true, true, true),
         method: "get",
       });
 
@@ -396,7 +396,7 @@ export default class SocialAPI {
     commentOnPost: async (id, { body, replyToId = null }) => {
       const url = new URL(`${this.apiPostPath}/${id}/comment`);
       const response = await fetch(url, {
-        headers: this.util.setupHeaders(true, true),
+        headers: this.util.setupHeaders(true, true, true),
         method: "post",
         body: JSON.stringify({ body, replyToId }),
       });
@@ -407,7 +407,7 @@ export default class SocialAPI {
     },
     deleteComment: async (id, commentId) => {
       const response = await fetch(`${this.apiPostPath}/${id}/comment/${commentId}`, {
-        headers: this.util.setupHeaders(true, true),
+        headers: this.util.setupHeaders(true, true, true),
         method: "delete"
       })
       if (response.ok) {
@@ -480,7 +480,7 @@ export default class SocialAPI {
       url.searchParams.append("page", page);
 
       const response = await fetch(url, {
-        headers: this.util.setupHeaders(true, true),
+        headers: this.util.setupHeaders(true, true, true),
         method: "get",
       });
       if (response.ok) {
@@ -505,7 +505,7 @@ export default class SocialAPI {
       );
 
       const response = await fetch(url, {
-        headers: this.util.setupHeaders(true, true),
+        headers: this.util.setupHeaders(true, true, true),
         method: "get",
       });
       if (response.ok) {
@@ -527,7 +527,7 @@ export default class SocialAPI {
       const url = new URL(`${this.apiProfilesPath}/${profile}/follow`);
 
       const response = await fetch(url, {
-        headers: this.util.setupHeaders(true, true),
+        headers: this.util.setupHeaders(true, true, true),
         method: "put",
       });
       if (response.ok) {
@@ -549,7 +549,7 @@ export default class SocialAPI {
       const url = new URL(`${this.apiProfilesPath}/${profile}/unfollow`);
 
       const response = await fetch(url, {
-        headers: this.util.setupHeaders(true, true),
+        headers: this.util.setupHeaders(true, true, true),
         method: "put",
       });
       if (response.ok) {
@@ -566,7 +566,7 @@ export default class SocialAPI {
       );
 
       const response = await fetch(url, {
-        headers: this.util.setupHeaders(true, true),
+        headers: this.util.setupHeaders(true, true, true),
         method: "get",
       });
       if (response.ok) {
