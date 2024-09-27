@@ -422,41 +422,6 @@ export default class SocialAPI {
   };
 
   /**
-   * The profile methods for the SocialAPI.
-   * Handles actions related to the currently logged-in user's profile.
-   *
-   * @property {Object} loggedInProfile - Contains methods related to the logged-in user's profile.
-   * @property {function} readPosts - Fetches posts associated with the logged-in user's profile.
-   */
-  // profile = {
-  //   loggedInProfile: {
-  //     /**
-  //      * Fetches posts from the currently logged-in profile.
-  //      *
-  //      * @async
-  //      * @function readPosts
-  //      * @returns {Promise<Array<Object>>} An array of post objects related to the logged-in user's profile.
-  //      * @throws {Error} Throws an error if the posts could not be fetched.
-  //      */
-  //     readPosts: async () => {
-  //       const url = new URL(
-  //         `${this.apiLoggedInProfilePostsPath}${this.apiProfilesQueryParameters}`
-  //       );
-
-  //       const response = await fetch(url, {
-  //         headers: this.util.setupHeaders(true, true),
-  //         method: "get",
-  //       });
-  //       if (response.ok) {
-  //         const { data } = await response.json();
-  //         return data;
-  //       }
-  //       throw new Error("Could not fetch posts from profile");
-  //     },
-  //   },
-  // };
-
-  /**
    * The profile management methods for the SocialAPI.
    * Allows for reading all profiles, a single profile, and following or unfollowing profiles.
    *
