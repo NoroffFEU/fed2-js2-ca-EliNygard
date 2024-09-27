@@ -93,7 +93,7 @@ export default class SocialAPI {
   };
 
   util = {
-    setupHeaders: (body, key, accessToken) => {
+    setupHeaders: (body, accessToken, key) => {
       const headers = new Headers();
 
       if (accessToken) {
@@ -104,7 +104,7 @@ export default class SocialAPI {
       }
 
       if (key) {
-        headers.append("X-Noroff-API-Key", this.key);
+        headers.append("X-Noroff-API-Key", "2738afc4-c4e5-4848-942b-c94bf9b4be1f");
       }
       return headers;
     },
