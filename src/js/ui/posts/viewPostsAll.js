@@ -20,24 +20,34 @@ import { onUnfollowProfile } from "../profiles/unfollowProfile.js";
 export async function viewPostsAll() {
   try {
     const posts = await api.posts.read();
-
+    
     const li = posts.map((post) => {
+      
       const li = document.createElement("li");
 
       const h3 = document.createElement("h3");
       h3.textContent = post.title;
+
+      const body = document.createElement("p")
+      body.textContent = post.body
+
+      const avatar = document.createElement("img")
+      avatar.classList.add("profile-avatar")
+      avatar.src = post.author.avatar.url
 
       const aAuthor = document.createElement("a");
       aAuthor.textContent = `Author: ${post.author.name}`;
       aAuthor.href = `../profiles/profile/?name=${post.author.name}`;
 
       const img = document.createElement("img");
+      img.classList.add("post-img")
       img.src =
         post.media && post.media.url
           ? post.media.url
-          : "https://picsum.photos/id/14/200/300";
+          : "/images/noroff-logo-icon.png";
       img.onerror = function () {
-        img.alt = post.media.alt;
+        img.src = "/images/noroff-logo-icon.png"
+        throw new Error("Could not fetch img src. Setting a default img")
       };
 
       const btnFollow = document.createElement("button");
@@ -50,7 +60,7 @@ export async function viewPostsAll() {
         onUnfollowProfile(post.author)
       );
 
-      li.append(img, h3, aAuthor, btnFollow, btnUnfollow);
+      li.append(img, h3, body, avatar, aAuthor, btnFollow, btnUnfollow);
       return li;
     });
 
