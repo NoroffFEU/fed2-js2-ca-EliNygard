@@ -29,15 +29,15 @@ export default class SocialAPI {
   }
 
   set user(userData) {
-    localStorage.setItem("user", JSON.stringify(userData))
+    localStorage.setItem("user", JSON.stringify(userData));
   }
 
   get token() {
-    return localStorage.token
+    return localStorage.token;
   }
 
   set token(accessToken) {
-    localStorage.setItem("token", accessToken)
+    localStorage.setItem("token", accessToken);
   }
 
   get id() {
@@ -91,10 +91,10 @@ export default class SocialAPI {
   };
 
   util = {
-    setupHeaders: (body, accessToken, key) => {
+    setupHeaders: (body, key, token) => {
       const headers = new Headers();
 
-      if (accessToken) {
+      if (token) {
         headers.append("Authorization", `Bearer ${this.token}`);
       }
       if (body) {
@@ -168,7 +168,7 @@ export default class SocialAPI {
       const body = JSON.stringify({ email, password });
 
       const response = await fetch(SocialAPI.paths.login, {
-        headers: this.util.setupHeaders(true, true),
+        headers: this.util.setupHeaders(true, true, true),
         method: "post",
         body,
       });
@@ -176,7 +176,7 @@ export default class SocialAPI {
       if (response.ok) {
         const { data } = await response.json();
         const { accessToken: token, ...user } = data;
-        
+
         this.user = user;
         this.token = token;
 
@@ -192,7 +192,7 @@ export default class SocialAPI {
     logout: () => {
       try {
         this.user = null;
-        this.token = null
+        this.token = null;
         window.location.href = "/auth/login/";
       } catch (error) {
         console.error(error);
@@ -404,16 +404,20 @@ export default class SocialAPI {
       throw new Error("Could not add comment. Please try again.");
     },
     deleteComment: async (id, commentId) => {
-      const response = await fetch(`${this.apiPostPath}/${id}/comment/${commentId}`, {
-        headers: this.util.setupHeaders(true, true, true),
-        method: "delete"
-      })
+      const response = await fetch(
+        `${this.apiPostPath}/${id}/comment/${commentId}`,
+        {
+          headers: this.util.setupHeaders(true, true, true),
+          method: "delete",
+        }
+      );
       if (response.ok) {
-        return
+        return;
       }
-      throw new Error(`Could not delete comment with id #${commentId}. Please try again.`)
-
-    }
+      throw new Error(
+        `Could not delete comment with id #${commentId}. Please try again.`
+      );
+    },
   };
 
   /**
