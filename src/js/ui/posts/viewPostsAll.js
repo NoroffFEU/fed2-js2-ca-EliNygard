@@ -1,5 +1,6 @@
 import api from "../../api/instance.js";
 import { onFollowProfile } from "../profiles/followProfile.js";
+import { onUnfollowProfile } from "../profiles/unfollowProfile.js";
 
 /**
  * Fetches and displays all posts.
@@ -28,7 +29,7 @@ export async function viewPostsAll() {
 
       const aAuthor = document.createElement("a");
       aAuthor.textContent = `Author: ${post.author.name}`;
-      aAuthor.href = `../profiles/posts/?name=${post.author.name}`;
+      aAuthor.href = `../profiles/profile/?name=${post.author.name}`;
 
       const img = document.createElement("img");
       img.src =
@@ -36,7 +37,6 @@ export async function viewPostsAll() {
           ? post.media.url
           : "https://picsum.photos/id/14/200/300";
       img.onerror = function () {
-        // img.src = "https://picsum.photos/id/14/200/300";
         img.alt = post.media.alt;
       };
 
@@ -44,7 +44,13 @@ export async function viewPostsAll() {
       btnFollow.textContent = "Follow";
       btnFollow.addEventListener("click", () => onFollowProfile(post.author));
 
-      li.append(img, h3, aAuthor, btnFollow);
+      const btnUnfollow = document.createElement("button");
+      btnUnfollow.textContent = "Unfollow";
+      btnUnfollow.addEventListener("click", () =>
+        onUnfollowProfile(post.author)
+      );
+
+      li.append(img, h3, aAuthor, btnFollow, btnUnfollow);
       return li;
     });
 

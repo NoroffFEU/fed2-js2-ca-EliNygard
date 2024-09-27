@@ -30,7 +30,7 @@ export async function viewPostsFollowing() {
 
       const aAuthor = document.createElement("a");
       aAuthor.textContent = `Author: ${post.author.name}`;
-      aAuthor.href = `../profiles/posts/?name=${post.author.name}`;
+      aAuthor.href = `../profiles/profile/?name=${post.author.name}`;
 
       const img = document.createElement("img");
       img.src =
