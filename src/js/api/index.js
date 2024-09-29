@@ -568,23 +568,13 @@ export default class SocialAPI {
      * @returns {Promise<Object>} The updated profile data.
      * @throws {Error} Throws an error if the profile update fails.
      */
-    update: async (profile, { bio, banner, avatar }) => {
+    update: async (profile, data) => {
       const url = new URL(`${this.apiProfilesPath}/${profile}`);
 
       const response = await fetch(url, {
         headers: this.util.setupHeaders(true, true, true),
         method: "PUT",
-        body: JSON.stringify({
-          bio,
-          banner: {
-            url: banner.url,
-            alt: "",
-          },
-          avatar: {
-            url: avatar.url,
-            alt: "",
-          },
-        }),
+        body: JSON.stringify(data),
       });
       if (response.ok) {
         return await response.json();
