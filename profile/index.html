@@ -1,4 +1,4 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
@@ -13,8 +13,20 @@
     <a href="/">Home</a>
     <button data-auth="logout">Logout</button>
 
-    <form name="updateProfile">
-      <button>Update Profile</button>
+    <form name="updateProfile" enctype="multipart/form-data">
+      <fieldset>
+        <legend>Update your profile</legend>
+        <label for="bio">Bio</label>
+        <input type="text" name="bio" id="bio" />
+        
+        <label for="avatar">Avatar</label>
+        <input type="text" id="avatar" name="avatar"/>
+        
+        <label for="banner">Avatar</label>
+        <input type="text" id="banner" name="banner"/>
+        
+        <button>Update Profile</button>
+      </fieldset>
     </form>
 
     <a href="../post/create/">Create a new post</a>
@@ -23,6 +35,5 @@
     <section id="postsList">
       <h2>My posts</h2>
     </section>
-    
   </body>
 </html>
