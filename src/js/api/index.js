@@ -33,7 +33,11 @@ export default class SocialAPI {
   }
 
   get token() {
-    return localStorage.getItem("token");
+    try{
+      return localStorage.getItem("token");
+    }catch {
+      return null
+    }
   }
 
   set token(accessToken) {
