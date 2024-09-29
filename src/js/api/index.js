@@ -530,6 +530,15 @@ export default class SocialAPI {
       }
       throw new Error("You are not following this profile.");
     },
+    /**
+     * Read posts by a specified profile.
+     *
+     * @async
+     * @function readPostsByProfile
+     * @param {string} profile - The name of the profile to view posts.
+     * @returns {Promise<Object>} The posts to be read.
+     * @throws {Error} Throws an error if the posts can not be fetched.
+     */
     readPostsByProfile: async (profile) => {
       const url = new URL(
         `${this.apiProfilesPath}/${profile}/posts${this.apiProfilesQueryParameters}`
@@ -546,5 +555,30 @@ export default class SocialAPI {
       }
       throw new Error("Could not fetch posts from profile.");
     },
+    /**
+     * Updates or edits an existing profile
+     *
+     * @async
+     * @function update
+     * @param {string} profile - The name of the profile to update.
+     * @param {Object} profileDetails - The details of the profile to be updated.
+     * @param {string} profileDetails.bio - The updated bio of the profile.
+     * @param {string} profileDetails.banner - The updated banner img of the profile.
+     * @param {string} profileDetails.avatar - The updated avatar img of the profile.
+     * @returns {Promise<Object>} The updated profile data.
+     * @throws {Error} Throws an error if the profile update fails.
+     */
+    update: async (profile, { bio, banner, avatar}) => {  
+      const body = JSON.stringify({bio, banner, avatar})
+      const response = await fetch (`${this.apiProfilesPath}/${profile}`, {
+        headers: this.util.setupHeaders(true, true, true),
+        method: "put",
+        body,
+      })
+      if (response.ok) {
+        return await response.json()
+      }
+      throw new Error ("Error updating profile. Please try again.")
+    }
   };
 }
