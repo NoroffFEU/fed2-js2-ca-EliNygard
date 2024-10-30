@@ -1,1 +1,5 @@
-export function onLogout() {}
+import { setLogoutListener } from "../global/logout";
+
+export function onLogout() {
+  setLogoutListener();
+}
